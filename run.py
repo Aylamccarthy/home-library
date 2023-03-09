@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import prettytable
+from prettytable import PrettyTable
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -17,7 +17,7 @@ books = SHEET.worksheet('books')
 data = books.get_all_values()
 
 def view_all_books():
-    print('Updating books...')
+    print('Updating books...\n')
     data = books.get_all_values()
     print(data)
 
@@ -35,3 +35,11 @@ def add_book():
 
 add_book()
     
+# Taken and modified to suit the app, 
+# from https://pypi.org/project/prettytable/
+
+x = PrettyTable()
+x.field_names = ["ID", "Title", "Author"]
+x.add_row(["1", "Harry Potter", "J.K. Rowling"])
+
+print(x)
