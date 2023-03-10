@@ -39,8 +39,27 @@ def show_menu():
     will print menu. User is given an option between 1-6.
     """
     menu()
-   
+    user_option = input(Fore.LIGHTGREEN_EX
+                            + "Please select a number from 1 to 6 "
+                              "to continue: "
+                            + Style.RESET_ALL)
 
+
+show_menu()
+
+def validate_user_option_input():
+    """
+    Checks if the user input is between 1-6.
+    Code taken from https://stackoverflow.com/questions/
+    and modified to suit the app.
+    """
+    while True:
+        n = int(input("Please enter a number between 1 and 6: "))
+        if 1 <= n <= 6:
+            break
+    print('Please try again')
+
+validate_user_option_input()
 
 
 
