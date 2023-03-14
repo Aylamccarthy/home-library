@@ -18,8 +18,8 @@ SHEET = GSPREAD_CLIENT.open('home_library')
 
 books = SHEET.worksheet('books')
 data = books.get_all_values()
-print("Welcome to Home Library App.")
-print("You can manage all your books here.")
+print("Welcome to Home Library App.\n")
+print("You can manage all your books here.\n")
 print("Please use menu below to continue.\n")
 
 def menu():
@@ -45,18 +45,22 @@ def show_menu():
                               "to continue: "
                             + Style.RESET_ALL)
 
+show_menu()
+
 
 def validate_user_option_input():
     """
     Checks if the user input is between 1-6.
-    Code taken from https://stackoverflow.com/questions/
+    Code taken from https://stackoverflow.csom/questions/
     and modified to suit the app.
     """
+    
     while True:
         n = int(input("Please enter a number between 1 and 6: "))
         if 1 <= n <= 6:
             break
 
+validate_user_option_input()
 
 def add_book():
     """Allows user to add new entry to the library.
@@ -67,32 +71,48 @@ def add_book():
 
 add_book()
 
+def print_all_database():
+    """
+    Gets all values from the database and prints them
+    to the terminal in a form of table generated with
+    PrettyTable library.
+    Maximum width of whole table is set to 79 characters.
+    Each column's maximum width is set individually.
+    """
+    books = SHEET.worksheet('books')
+    x = PrettyTable()
+    x.field_names = books.row_values(1)
+    x.add_rows = books.get_all_values()
+    print(x)
+
+print_all_database()
+
+
 
 def view_all_books():
-    print('Updating books...\n')
-    data = books.get_all_values()
-    print(data)
+    """
+    Show all the book entries from the database.
+    Code taken and modified to suit the app, 
+    from https://pypi.org/project/prettytable/
+    """
+book_list = PrettyTable()
+book_list.field_names = ["ID", "Title", "Author", "Category", "Status", "Description"]
+book_list.add_rows = data
 
-
+view_all_books()
+    
 def get_book_titles():
     books = SHEET.worksheet('books')
     column = books.col_values(2)
     print(column)
 
-   
-    
-# Taken and modified to suit the app, 
-# from https://pypi.org/project/prettytable/
 
-x = PrettyTable()
-x.field_names = ["ID", "Title", "Author"]
-x.add_row(["1", "Harry Potter", "J.K. Rowling"])
+def main():
+    menu()
+    show_menu()
+    validate_user_option_input()
+    add_book()
+    view_all_books()
+    get_book_titles()
+    print(book_list)
 
-
-# def main():
-show_menu()
-validate_user_option_input()
-add_book()
-view_all_books()
-get_book_titles()
-print(x)
