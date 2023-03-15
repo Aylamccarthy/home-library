@@ -73,13 +73,79 @@ def show_menu():
                             + Style.RESET_ALL)
 
 
+def database_check():
+    """
+    Checks if database is not empty.
+    If it's empty, user is asked to add his first book.
+    Majority of app functionalities are disabled if DB is empty.
+    """
+    while True:
+        # checks if there is a record below DB headers
+        is_empty = len(books.row_values(2))
+        if is_empty == 0:
+            clear_terminal()
+            print(Fore.LIGHTRED_EX + "Database is empty, add at least "
+                                     "one book to continue." + Style.RESET_ALL)
+            return True
+
+        break
+
+def validate_string(user_text, max_length, element):
+    """
+    Validates user input, checks if input is too short or too long,
+    if it's empty, or starts with special character.
+    :param element: is variable assigned to user input, e.g. title, author
+    :param user_text contains prompt to enter text
+    :param max_length - max characters allowed in input
+    """
+
+    while True:
+        user_input = input(user_text)
+        # checks if input is empty
+        if len(user_input) == 0:
+            clear_terminal()
+            print(Fore.LIGHTRED_EX + f"{element.capitalize()} can't be empty!"
+                                   + Style.RESET_ALL)
+        # checks if first character of the string is not special character
+        elif not user_input[0].isalnum():
+            print(Fore.LIGHTRED_EX
+                  + f"{element.capitalize()} has to start with letter "
+                    f"or digit!"
+                  + Style.RESET_ALL)
+        # checks if input is shorter than required 3 characters
+        elif len(user_input) <= 2:
+            clear_terminal()
+            print(Fore.LIGHTRED_EX + "Please enter at least 3 characters..."
+                                   + Style.RESET_ALL)
+        # checks if input is longer than maximum allowed
+        elif len(user_input) > int(max_length):
+            clear_terminal()
+            print(
+                Fore.LIGHTRED_EX
+                + f"Entered {element} exceeds maximum "
+                  f"allowed length of {max_length} characters!"
+                + Style.RESET_ALL)
+        else:
+            element = user_input.title()
+            return element
+
+
+
 
 def add_book():
     """Allows user to add new entry to the library.
     """
-    print("Now you can add a new book  to your library.")
-    book_title = input("Please enter your book title here:\n ")
-    book_author = input("Please enter the books author:\n")
+    # initialize variable to store all book details from user input
+    book_to_be_added = []
+
+    while True:
+
+
+
+
+
+
+
 
 add_book()
 
