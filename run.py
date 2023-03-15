@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style
 from art import *
+import os
 
 
 SCOPE = [
@@ -35,18 +36,7 @@ def menu():
     6. Exit
     """+ Style.RESET_ALL)
 
-def show_menu():
-    """
-    will print menu. User is given an option between 1-6.
-    """
-    menu()
-    user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 6 "
-                              "to continue: "
-                            + Style.RESET_ALL)
-
-show_menu()
-
+menu()
 
 def validate_user_option_input():
     """
@@ -61,6 +51,28 @@ def validate_user_option_input():
             break
 
 validate_user_option_input()
+
+def clear_terminal():
+    """
+    Clears terminal for better screen readability.
+    Method found on StackOverflow:
+    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+
+def show_menu():
+    """
+    will print menu. User is given an option between 1-6.
+    """
+    menu()
+    user_option = input(Fore.LIGHTGREEN_EX
+                            + "Please select a number from 1 to 6 "
+                              "to continue: "
+                            + Style.RESET_ALL)
+
+
 
 def add_book():
     """Allows user to add new entry to the library.
@@ -82,12 +94,11 @@ def print_all_database():
     books = SHEET.worksheet('books')
     x = PrettyTable()
     x.field_names = books.row_values(1)
-    x.add_rows = books.get_all_values()
+    all_books = books.get_all_values()
+    
     print(x)
 
 print_all_database()
-
-
 
 def view_all_books():
     """
@@ -96,7 +107,7 @@ def view_all_books():
     from https://pypi.org/project/prettytable/
     """
 book_list = PrettyTable()
-book_list.field_names = ["ID", "Title", "Author", "Category", "Status", "Description"]
+book_list.field_names = books.col_values(1)
 book_list.add_rows = data
 
 view_all_books()
