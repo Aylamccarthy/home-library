@@ -38,6 +38,14 @@ def menu():
 
 menu()
 
+def clear_terminal():
+    """
+    Clears terminal for better screen readability.
+    Method found on StackOverflow:
+    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
 def validate_user_option_input():
     """
     Checks if the user input is between 1-6.
@@ -49,17 +57,8 @@ def validate_user_option_input():
         n = int(input("Please enter a number between 1 and 6: "))
         if 1 <= n <= 6:
             break
-
+   
 validate_user_option_input()
-
-def clear_terminal():
-    """
-    Clears terminal for better screen readability.
-    Method found on StackOverflow:
-    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
 
 
 def show_menu():
@@ -72,6 +71,7 @@ def show_menu():
                               "to continue: "
                             + Style.RESET_ALL)
 
+    clear_terminal()
 
 def database_check():
     """
@@ -131,7 +131,7 @@ def validate_string(user_text, max_length, element):
 
 def validate_num_range(user_input, first_val, last_val):
     """
-    Checks if user input is withing the range of possible options.
+    Checks if user input is within the range of possible options.
     Any input out of desired range will give user a hint showing
     a message containing exact range of possible options.
     :param user_input: this is user input
@@ -227,6 +227,12 @@ def add_book():
     # insert all collected inputs into the list
     book_to_be_added.extend([title, author, category, read_status,
                              description])
+    
+    clear_terminal()
+    LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
+    print(LINE)
+    first_empty_row = len(books.get_all_values())
+    book_to_be_added.insert(0, first_empty_row)
 
 add_book()
 
@@ -273,4 +279,10 @@ def main():
     view_all_books()
     get_book_titles()
     print(book_list)
+    clear_terminal()
+
+    
+
+    
+
 
