@@ -18,10 +18,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('home_library')
 
 books = SHEET.worksheet('books')
-data = books.get_all_values()
 print("Welcome to Home Library App.\n")
 print("You can manage all your books here.\n")
 print("Please use menu below to continue.\n")
+
+
 
 def menu():
     """
@@ -36,7 +37,9 @@ def menu():
     6. Exit
     """+ Style.RESET_ALL)
 
+
 menu()
+
 
 def clear_terminal():
     """
@@ -57,21 +60,12 @@ def validate_user_option_input():
         n = int(input("Please enter a number between 1 and 6: "))
         if 1 <= n <= 6:
             break
-   
+
 validate_user_option_input()
 
 
-def show_menu():
-    """
-    will print menu. User is given an option between 1-6.
-    """
-    menu()
-    user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 6 "
-                              "to continue: "
-                            + Style.RESET_ALL)
+clear_terminal()
 
-    clear_terminal()
 
 def database_check():
     """
@@ -89,6 +83,10 @@ def database_check():
             return True
 
         break
+
+
+database_check()
+
 
 def validate_string(user_text, max_length, element):
     """
@@ -173,6 +171,7 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 READ_YES = "Read"
 READ_NO = "Not read"
 
+
 def add_book():
     """
     Allows user to add new book to database using user input with following
@@ -234,7 +233,9 @@ def add_book():
     first_empty_row = len(books.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
 
+
 add_book()
+
 
 def print_all_database():
     """
@@ -245,30 +246,89 @@ def print_all_database():
     Each column's maximum width is set individually.
     """
     books = SHEET.worksheet('books')
+    HEADERS = books.row_values(1)
     x = PrettyTable()
-    x.field_names = books.row_values(1)
-    all_books = books.get_all_values()
+    x.field_names = HEADERS
+    x.align["ID"] = "r"  # aligns column to the right
+    x.align["Title"] = "l"  # aligns column to the left
+    x.align["Author"] = "l"
+    x.align["Category"] = "l"
+    x.align["Status"] = "l"
+    all_values = books.get_all_values()  # gets all values from DB
     
     print(x)
 
+
 print_all_database()
 
-def view_all_books():
-    """
-    Show all the book entries from the database.
-    Code taken and modified to suit the app, 
-    from https://pypi.org/project/prettytable/
-    """
-book_list = PrettyTable()
-book_list.field_names = books.col_values(1)
-book_list.add_rows = data
 
-view_all_books()
-    
 def get_book_titles():
     books = SHEET.worksheet('books')
     column = books.col_values(2)
     print(column)
+
+
+get_book_titles()
+
+
+def show_menu():
+    """
+    Will print menu. User is given an option between 1-6.
+    """
+    while True:
+        menu()
+        user_option = input(Fore.LIGHTGREEN_EX
+                            + "Please select a number from 1 to 6 "
+                              "to continue: "
+                            + Style.RESET_ALL)
+
+        clear_terminal()
+        # validates user input only values from 1 to 6 are allowed
+        validate_user_option_input()
+        if user_option == "1":
+            add_book()
+        elif user_option == "2":
+            view_all_books()
+        elif user_option == "3":
+            print_all_database()
+            break
+
+
+def exit_app():
+    """
+     This function prints goodbye message to the user.
+     It displays app credits and developers social links.
+     User is asked to confirm exit and random quote is printed.
+     Next read suggestion is printed to the user if in database
+     is any book with status "Not read".
+    """
+    while True:
+        are_you_sure = input(Fore.LIGHTYELLOW_EX
+                             + "\nAre you sure you want to quit? Y/N: "
+                             + Style.RESET_ALL)
+        if validate_yes_no(are_you_sure):
+
+            if "y" in are_you_sure or "Y" in are_you_sure:
+                clear_terminal()
+                print(Fore.LIGHTYELLOW_EX
+                      + f"Thank you for using {constants.APP} app!"
+                      + Style.RESET_ALL)
+                print(constants.END_SCREEN)
+                random_not_read()
+                print(Fore.LIGHTYELLOW_EX + "\nTerminating..."
+                                          + Style.RESET_ALL)
+                break
+            else:
+                clear_terminal()
+                menu.show_menu()
+
+        else:
+            exit_app()
+
+        break
+
+
+exit_app()
 
 
 def main():
@@ -281,8 +341,4 @@ def main():
     print(book_list)
     clear_terminal()
 
-    
-
-    
-
-
+main()
