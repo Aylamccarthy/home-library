@@ -170,6 +170,16 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 # Reading status
 READ_YES = "Read"
 READ_NO = "Not read"
+APP = "Home Library App"
+END_SCREEN = """
+This App was developed by Ayla McCarthy as Project Portfolio 3
+for Diploma in Full Stack Software Development
+at Code Institute.
+
+Visit my profiles: 
+https://github.com/aylamccarthy
+https://www.linkedin.com/in/aylamccarthy/
+""" + Style.RESET_ALL
 
 
 def add_book():
@@ -294,13 +304,33 @@ def show_menu():
             break
 
 
+def validate_yes_no(user_input):
+    """
+    Validates Y/N inputs.
+    Prints user feedback if input is invalid.
+    :param user_input - contains user choice
+    :return True if valid input is given
+    """
+    try:
+        valid_options = ["y", "Y", "n", "N"]
+        if user_input in valid_options:
+            return True
+        else:
+            raise ValueError
+    except ValueError:
+        clear_terminal()
+        print(Fore.LIGHTRED_EX
+              + "\nWrong input, please select \"Y\" or \"N\".\n"
+              + Style.RESET_ALL)
+
+
+user_input = input()
+
+
 def exit_app():
     """
      This function prints goodbye message to the user.
-     It displays app credits and developers social links.
-     User is asked to confirm exit and random quote is printed.
-     Next read suggestion is printed to the user if in database
-     is any book with status "Not read".
+     User is asked to confirm exit.
     """
     while True:
         are_you_sure = input(Fore.LIGHTYELLOW_EX
@@ -311,16 +341,15 @@ def exit_app():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 print(Fore.LIGHTYELLOW_EX
-                      + f"Thank you for using {constants.APP} app!"
+                      + f"Thank you for using {APP} app!"
                       + Style.RESET_ALL)
-                print(constants.END_SCREEN)
-                random_not_read()
+                print(END_SCREEN)
                 print(Fore.LIGHTYELLOW_EX + "\nTerminating..."
                                           + Style.RESET_ALL)
                 break
             else:
                 clear_terminal()
-                menu.show_menu()
+                show_menu()
 
         else:
             exit_app()
@@ -340,5 +369,8 @@ def main():
     get_book_titles()
     print(book_list)
     clear_terminal()
+    exit_app()
+    validate_yes_no(user_input)
+
 
 main()
