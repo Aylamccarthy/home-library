@@ -1,31 +1,44 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align = "center">Home Library App- Python Project </h1>
 
-Welcome Aylamccarthy,
+### Developer: Ayla McCarthy
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+<b>[View live program here]() </b>  :computer:
 
-## Reminders
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+![Program mockup]
 
-## Creating the Heroku app
+The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal book libraries, view, add, edit, and remove books.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Project purpose was to build a command-line python application that allows user to manage a common dataset about a particular domain.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+# Table of Content
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+# Project
+## Strategy/Scope
 
-Connect your GitHub repository and deploy as normal.
+I chose to develop an application that can be used in real life. Home Library App allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, editing and removing books.
 
-## Constraints
+The application should have a clean and intuitive user interface and offer easy access and navigation to all functionalities.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+To achieve the strategy goals, I implemented the following features:
 
------
-Happy coding!
+- Customised terminal display page for better visual experience.
+- Colours in terminal to give user feedback dependent on his actions.
+- Reliable and quick connection with database provided by Google.
+- Menu with easy access to all features and possibility to exit or restart the application.
+- Clean user interface for easy navigation and readability.
+
+
+
+
+
+
+
+
+
+
+### Resources
+Python Tutorial for Beginners | Full Python Course | Learn Python in 2023 TechWorld with Nana
+Python Google Sheets API Tutorial - 2019 |Tech With Tim
+

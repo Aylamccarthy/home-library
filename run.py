@@ -127,6 +127,7 @@ def validate_string(user_text, max_length, element):
             element = user_input.title()
             return element
 
+
 def validate_num_range(user_input, first_val, last_val):
     """
     Checks if user input is within the range of possible options.
