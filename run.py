@@ -18,9 +18,34 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('home_library')
 
 books = SHEET.worksheet('books')
-print("Welcome to Home Library App.\n")
-print("You can manage all your books here.\n")
-print("Please use menu below to continue.\n")
+
+# PrettyTable columns width
+MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 12, "Status": 8}
+# PrettyTable table width
+TABLE_MAX_LEN = 79
+# Book details max length for validation of inputs
+ID_MAX_LEN = MAX_LEN["ID"]
+TITLE_MAX_LEN = MAX_LEN["Title"]
+AUTHOR_MAX_LEN = MAX_LEN["Author"]
+CAT_MAX_LEN = MAX_LEN["Category"]
+# description below assigned individually, it is displayed
+# outside the PrettyTable tab.
+DESC_MAX_LEN = 200
+# Separator line
+LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
+# Reading status
+READ_YES = "Read"
+READ_NO = "Not read"
+APP = "Home Library App"
+END_SCREEN = """
+This App was developed by Ayla McCarthy as Project Portfolio 3
+for Diploma in Full Stack Software Development
+at Code Institute.
+
+Visit my profiles: 
+https://github.com/aylamccarthy
+https://www.linkedin.com/in/aylamccarthy/
+""" + Style.RESET_ALL
 
 
 def logo():
@@ -29,16 +54,18 @@ def logo():
     """
     print(Fore.LIGHTCYAN_EX + """
      _   _                        _     _ _                          
- | | | | ___  _ __ ___   ___  | |   (_) |__  _ __ __ _ _ __ _   _ 
- | |_| |/ _ \| '_ ` _ \ / _ \ | |   | | '_ \| '__/ _` | '__| | | |
- |  _  | (_) | | | | | |  __/ | |___| | |_) | | | (_| | |  | |_| |
- |_| |_|\___/|_| |_| |_|\___| |_____|_|_.__/|_|  \__,_|_|   \__, |
-                                                            |___/ 
+    | | | | ___  _ __ ___   ___  | |   (_) |__  _ __ __ _ _ __ _   _ 
+    | |_| |/ _ \| '_ ` _ \ / _ \ | |   | | '_ \| '__/ _` | '__| | | |
+    |  _  | (_) | | | | | |  __/ | |___| | |_) | | | (_| | |  | |_| |
+    |_| |_|\___/|_| |_| |_|\___| |_____|_|_.__/|_|  \__,_|_|   \__, |
+                                                                |___/ 
     """ + Style.RESET_ALL)
-    print(Fore.LIGHTYELLOW_EX
-          + f"Welcome to {constants.APP}, you can manage all your books here."
-            f"\nPlease use menu below to continue." + Style.RESET_ALL)
+    print(Fore.LIGHTGREEN_EX
+          + f"Welcome to {APP}, you can manage all your books here."
+            f"\nPlease use Menu below to continue." + Style.RESET_ALL)
 
+
+logo()
 
 
 def menu():
@@ -76,12 +103,11 @@ def validate_user_option_input():
     while True:
         n = int(input("Please enter a number between 1 and 6: "))
         if 1 <= n <= 6:
+            
             break
 
+
 validate_user_option_input()
-
-
-clear_terminal()
 
 
 def database_check():
@@ -170,34 +196,6 @@ def validate_num_range(user_input, first_val, last_val):
               f"\nWrong input, please select option from "
               f"{first_val} to {last_val} "
               f"to continue..." + Style.RESET_ALL)
-
-# PrettyTable columns width
-MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 12, "Status": 8}
-# PrettyTable table width
-TABLE_MAX_LEN = 79
-# Book details max length for validation of inputs
-ID_MAX_LEN = MAX_LEN["ID"]
-TITLE_MAX_LEN = MAX_LEN["Title"]
-AUTHOR_MAX_LEN = MAX_LEN["Author"]
-CAT_MAX_LEN = MAX_LEN["Category"]
-# description below assigned individually, it is displayed
-# outside the PrettyTable tab.
-DESC_MAX_LEN = 200
-# Separator line
-LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
-# Reading status
-READ_YES = "Read"
-READ_NO = "Not read"
-APP = "Home Library App"
-END_SCREEN = """
-This App was developed by Ayla McCarthy as Project Portfolio 3
-for Diploma in Full Stack Software Development
-at Code Institute.
-
-Visit my profiles: 
-https://github.com/aylamccarthy
-https://www.linkedin.com/in/aylamccarthy/
-""" + Style.RESET_ALL
 
 
 def add_book():
