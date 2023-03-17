@@ -23,6 +23,23 @@ print("You can manage all your books here.\n")
 print("Please use menu below to continue.\n")
 
 
+def logo():
+    """
+    https://patorjk.com/software/taag/#p=display&f=Standard&t=Home%20Library
+    """
+    print(Fore.LIGHTCYAN_EX + """
+     _   _                        _     _ _                          
+ | | | | ___  _ __ ___   ___  | |   (_) |__  _ __ __ _ _ __ _   _ 
+ | |_| |/ _ \| '_ ` _ \ / _ \ | |   | | '_ \| '__/ _` | '__| | | |
+ |  _  | (_) | | | | | |  __/ | |___| | |_) | | | (_| | |  | |_| |
+ |_| |_|\___/|_| |_| |_|\___| |_____|_|_.__/|_|  \__,_|_|   \__, |
+                                                            |___/ 
+    """ + Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX
+          + f"Welcome to {constants.APP}, you can manage all your books here."
+            f"\nPlease use menu below to continue." + Style.RESET_ALL)
+
+
 
 def menu():
     """
@@ -362,6 +379,7 @@ exit_app()
 
 
 def main():
+    logo()
     menu()
     show_menu()
     validate_user_option_input()

@@ -7,7 +7,7 @@
 
 ![Program mockup]
 
-The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal book libraries, view, add, edit, and remove books.
+The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal/family book libraries, view, add, edit, and remove books.
 
 Project purpose was to build a command-line python application that allows user to manage a common dataset about a particular domain.
 
