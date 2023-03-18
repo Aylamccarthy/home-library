@@ -15,9 +15,11 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('home_library')
+# Open the Google Sheet by its name
+SHEET = GSPREAD_CLIENT.open('home_library').sheet1
+# Get the data from the sheet as a list of lists
+data = SHEET.get_all_values()
 
-books = SHEET.worksheet('books')
 
 # PrettyTable columns width
 MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 12, "Status": 8}
@@ -118,7 +120,7 @@ def database_check():
     """
     while True:
         # checks if there is a record below DB headers
-        is_empty = len(books.row_values(2))
+        is_empty = len(SHEET.row_values(2))
         if is_empty == 0:
             clear_terminal()
             print(Fore.LIGHTRED_EX + "Database is empty, add at least "
@@ -256,7 +258,7 @@ def add_book():
     clear_terminal()
     LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
     print(LINE)
-    first_empty_row = len(books.get_all_values())
+    first_empty_row = len(SHEET.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
 
 
@@ -271,30 +273,19 @@ def print_all_database():
     Maximum width of whole table is set to 79 characters.
     Each column's maximum width is set individually.
     """
-    books = SHEET.worksheet('books')
-    HEADERS = books.row_values(1)
-    x = PrettyTable()
-    x.field_names = HEADERS
-    x.align["ID"] = "r"  # aligns column to the right
-    x.align["Title"] = "l"  # aligns column to the left
-    x.align["Author"] = "l"
-    x.align["Category"] = "l"
-    x.align["Status"] = "l"
-    all_values = books.get_all_values()  # gets all values from DB
-    
-    print(x)
+    table = PrettyTable()  # Create a new table instance
+    # Define the columns of the table based on the first row of the data
+    table.field_names = data[0]
+
+    # Insert the data into the table
+    for row in data[1:]:
+        table.add_row(row)
+
+    # Print the table
+    print(table)
 
 
 print_all_database()
-
-
-def get_book_titles():
-    books = SHEET.worksheet('books')
-    column = books.col_values(2)
-    print(column)
-
-
-get_book_titles()
 
 
 def show_menu():
