@@ -29,9 +29,30 @@ To achieve the strategy goals, I implemented the following features:
 - Menu with easy access to all features and possibility to exit or restart the application.
 - Clean user interface for easy navigation and readability.
 
+## Site owner goals
+
+As a program owner/developer I would like to:
+- create application that has real life usage,
+- create application that is easy to use and intuitive to navigate,
+- create application with clean, good looking and accesible interface,
+- provide user a feedback to every input and action,
+- decide what kind of user input is allowed and valid,
+- create bug free application.
+
+##  External user's goal
+
+As a user I would like to:
+- be able to clearly understand application's purpose from the first contact,
+- be able to use program in real life,
+- be able to easily navigate the program and access all features,
+- be able to receive feedback to actions taken,
+- be able to decide what to do next, what features to use,
+- be able to quit program,
+- avoid any errors/bugs during using the app.
 
 
-
+## Bugs
+print data base using prettytable. I found this bug so challenging but eventually managed to solve it after days of research.
 
 
 
