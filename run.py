@@ -133,6 +133,7 @@ def database_check():
 database_check()
 
 
+
 def validate_string(user_text, max_length, element):
     """
     Validates user input, checks if input is too short or too long,
@@ -286,6 +287,22 @@ def print_all_database():
 
 
 print_all_database()
+
+
+def show_all_books():
+    """
+     Prints to the terminal a list of all books stored in the database.
+     If database is empty database_check() prompts user to add first book.
+    """
+    if database_check():
+        pass
+    else:
+        print(LINE)
+        print_all_database()
+        print(LINE)
+
+
+show_all_books()
 
 
 def show_menu():
