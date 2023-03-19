@@ -239,10 +239,10 @@ def add_book():
             # checks if user input is digit in range 1-2
             if validate_num_range(status, 1, 2):
                 if status == "1":
-                    read_status = READ_YES
+                    status = READ_YES
                     break
                 elif status == "2":
-                    read_status = READ_NO
+                    status = READ_NO
                     break
 
         description = validate_string(
@@ -252,15 +252,13 @@ def add_book():
 
         break
 
-    # insert all collected inputs into the list
-    book_to_be_added.extend([title, author, category, read_status,
-                             description])
     
     clear_terminal()
-    LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
     print(LINE)
-    first_empty_row = len(SHEET.get_all_values())
-    book_to_be_added.insert(0, first_empty_row)
+    row = ["", title, author, category, status, description]
+    book_to_be_added.insert(0, row)
+    SHEET.append_row(row)   # Append the row to the sheet
+    print("Your new book/s added successfully!") 
 
 
 add_book()
@@ -271,8 +269,6 @@ def print_all_database():
     Gets all values from the database and prints them
     to the terminal in a form of table generated with
     PrettyTable library.
-    Maximum width of whole table is set to 79 characters.
-    Each column's maximum width is set individually.
     """
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
