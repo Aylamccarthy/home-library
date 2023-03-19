@@ -84,8 +84,6 @@ def menu():
     """+ Style.RESET_ALL)
 
 
-menu()
-
 
 def clear_terminal():
     """
@@ -94,6 +92,7 @@ def clear_terminal():
     https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     """
     os.system("cls" if os.name == "nt" else "clear")
+
 
 def validate_user_option_input():
     """
@@ -107,9 +106,6 @@ def validate_user_option_input():
         if 1 <= n <= 6:
             
             break
-
-
-validate_user_option_input()
 
 
 def database_check():
@@ -128,10 +124,6 @@ def database_check():
             return True
 
         break
-
-
-database_check()
-
 
 
 def validate_string(user_text, max_length, element):
@@ -251,17 +243,14 @@ def add_book():
                                 "description")
 
         break
-
     
     clear_terminal()
     print(LINE)
     row = ["", title, author, category, status, description]
     book_to_be_added.insert(0, row)
     SHEET.append_row(row)   # Append the row to the sheet
-    print("Your new book/s added successfully!") 
-
-
-add_book()
+    print("Your new book/s is added successfully!") 
+    print(LINE)
 
 
 def print_all_database():
@@ -282,9 +271,6 @@ def print_all_database():
     print(table)
 
 
-print_all_database()
-
-
 def show_all_books():
     """
      Prints to the terminal a list of all books stored in the database.
@@ -296,32 +282,6 @@ def show_all_books():
         print(LINE)
         print_all_database()
         print(LINE)
-
-
-show_all_books()
-
-
-def show_menu():
-    """
-    Will print menu. User is given an option between 1-6.
-    """
-    while True:
-        menu()
-        user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 6 "
-                              "to continue: "
-                            + Style.RESET_ALL)
-
-        clear_terminal()
-        # validates user input only values from 1 to 6 are allowed
-        validate_user_option_input()
-        if user_option == "1":
-            add_book()
-        elif user_option == "2":
-            view_all_books()
-        elif user_option == "3":
-            print_all_database()
-            break
 
 
 def validate_yes_no(user_input):
@@ -377,21 +337,53 @@ def exit_app():
         break
 
 
-exit_app()
+def show_menu():
+    """
+    Will print menu. User is given an option between 1-6.
+    """
+    while True:
+        menu()  # prints menu
+        user_option = input(Fore.LIGHTGREEN_EX
+                            + "Please select a number from 1 to 6 "
+                              "to continue: "
+                            + Style.RESET_ALL)
+
+        clear_terminal()
+        # validates user input only values from 1 to 6 are allowed
+        validate_user_option_input()
+        if user_option == "1":
+            add_book()
+        elif user_option == "2":
+            view_all_books()
+        elif user_option == "3":
+            print_all_database()
+        elif user_option == "4":
+            show_all_books()
+        elif user_option == "5":
+            show_book_details()
+        elif user_option == "6":
+            exit_app()
+            break
+
+
+show_menu()
 
 
 def main():
+    """
+    Main function of the program. 
+    Shows App menu, where user can start and further use all the app functionalities.
+    """
     logo()
     menu()
     show_menu()
-    validate_user_option_input()
     add_book()
     view_all_books()
     get_book_titles()
-    print(book_list)
     clear_terminal()
     exit_app()
     validate_yes_no(user_input)
+    validate_user_option_input()
 
 
 main()
