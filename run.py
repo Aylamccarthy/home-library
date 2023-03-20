@@ -81,7 +81,7 @@ def menu():
     4. View all books
     5. Show book details
     6. Exit
-    """+ Style.RESET_ALL)
+    """ + Style.RESET_ALL)
 
 
 
@@ -249,15 +249,67 @@ def add_book():
     row = ["", title, author, category, status, description]
     book_to_be_added.insert(0, row)
     SHEET.append_row(row)   # Append the row to the sheet
-    print("Your new book/s is added successfully!") 
+    print("Your new book is added successfully!") 
     print(LINE)
+
+
+def edit_book():
+    """
+    This function allows the user to edit a book, update the sheet with the edited
+    data, and then print the updated data to the console.
+    """
+    
+    data = SHEET.get_all_values()
+     #  Create a PrettyTable with the data from the sheet
+    table = PrettyTable(["Title", "Author", "Category", "Status"])
+    table.field_names = data[0]
+    row = [title, author, category, status,]
+    for row in data[1:]:
+        table.add_row(row)
+
+    # Print the table to the console
+    print(table)
+
+    # Prompt the user to edit the data
+    while True:
+        row_index = input("Enter the index of the row you want to edit (start from 1,), or type 'q' to quit: ")
+        if row_index.lower() == 'q':
+            break
+        try:
+            row_index = int(row_index)
+            if row_index < 1 or row_index > len(data) - 1:
+                raise ValueError
+            break
+        except ValueError:
+            print("Invalid input. Please enter a number between 1 and {} or 'q' to quit.".format(len(data) - 1))
+
+    if row_index:
+         #  Prompt the user for the updated data
+        title = input("Enter the updated title: ")
+        author = input("Enter the updated author: ")
+        category = input("Enter the updated category: ")
+        status = input("Enter the updated status: ")
+        
+        # Update the row in the sheet with the new data
+        SHEET.update_cell(row_index + 1, 1, title)
+        SHEET.update_cell(row_index + 1, 2, author)
+        SHEET.update_cell(row_index + 1, 3, category)
+        SHEET.update_cell(row_index + 1, 4, status)
+        
+        # Print the updated table to the console
+        data = SHEET.get_all_values()
+        table = PrettyTable(["Title", "Author", "Category", "Status"])
+        table.field_names = data[0]
+        for row in data[1:]:
+            table.add_row(row)
+        print(table)
 
 
 def print_all_database():
     """
-    Gets all values from the database and prints them
-    to the terminal in a form of table generated with
-    PrettyTable library.
+     Gets all values from the database and prints them
+     to the terminal in a form of table generated with
+     PrettyTable library.
     """
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
@@ -345,7 +397,7 @@ def show_menu():
         menu()  # prints menu
         user_option = input(Fore.LIGHTGREEN_EX
                             + "Please select a number from 1 to 6 "
-                              "to continue: "
+                              "to continue:\n "
                             + Style.RESET_ALL)
 
         clear_terminal()
@@ -354,7 +406,7 @@ def show_menu():
         if user_option == "1":
             add_book()
         elif user_option == "2":
-            view_all_books()
+            edit_book()
         elif user_option == "3":
             print_all_database()
         elif user_option == "4":
@@ -372,18 +424,21 @@ show_menu()
 def main():
     """
     Main function of the program. 
-    Shows App menu, where user can start and further use all the app functionalities.
+    Shows App menu, where user can start and further use 
+    all the app functionalities.
     """
     logo()
     menu()
     show_menu()
     add_book()
+    edit_book()
     view_all_books()
     get_book_titles()
     clear_terminal()
     exit_app()
     validate_yes_no(user_input)
     validate_user_option_input()
+    print_all_database()
 
 
 main()
