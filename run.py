@@ -39,6 +39,29 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 READ_YES = "Read"
 READ_NO = "Not read"
 APP = "Home Library App"
+
+# Description of the 6 main functions of the app.
+ADD_BOOK = Fore.LIGHTYELLOW_EX + """
+Now you can add a new book to your library. \n
+You will be asked to enter book title, author, category and status.
+Choose if you have read the book or not. Book ID is generated automatically.
+""" + Style.RESET_ALL
+
+EDIT_BOOK = Fore.LIGHTYELLOW_EX \
+            + "You can update all book details below." \
+            + Style.RESET_ALL
+
+REMOVE_BOOK = Fore.LIGHTYELLOW_EX \
+              + "Here you can remove selected book from the database." \
+              + Style.RESET_ALL
+
+VIEW_ALL_BOOKS = Fore.LIGHTYELLOW_EX \
+                 + f"This is the list of all your books." \
+                 + Style.RESET_ALL
+
+SHOW_BOOK_DETAILS = Fore.LIGHTYELLOW_EX \
+                    + "This is detailed view of the book entry." \
+                    + Style.RESET_ALL
 END_SCREEN = """
 This App was developed by Ayla McCarthy as Project Portfolio 3
 for Diploma in Full Stack Software Development
@@ -255,8 +278,8 @@ def add_book():
 
 def edit_book():
     """
-    This function allows the user to edit a book, update the sheet with the edited
-    data, and then print the updated data to the console.
+    This function allows the user to edit a book, update the sheet with the 
+    edited data, and then print the updated data to the console.
     """
     
     data = SHEET.get_all_values()
@@ -272,7 +295,7 @@ def edit_book():
 
     # Prompt the user to edit the data
     while True:
-        row_index = input("Enter the index of the row you want to edit (start from 1,), or type 'q' to quit: ")
+        row_index = input("Enter the index of the row you want to edit, or type 'q' to quit: ")
         if row_index.lower() == 'q':
             break
         try:
@@ -281,7 +304,7 @@ def edit_book():
                 raise ValueError
             break
         except ValueError:
-            print("Invalid input. Please enter a number between 1 and {} or 'q' to quit.".format(len(data) - 1))
+            print("Invalid input. Please enter a number between 1 and 6 or 'q' to quit.".format(len(data) - 1))
 
     if row_index:
          #  Prompt the user for the updated data
@@ -404,10 +427,12 @@ def show_menu():
         # validates user input only values from 1 to 6 are allowed
         validate_user_option_input()
         if user_option == "1":
+            print(ADD_BOOK)
             add_book()
         elif user_option == "2":
             edit_book()
         elif user_option == "3":
+            print(VIEW_ALL_BOOKS)
             print_all_database()
         elif user_option == "4":
             show_all_books()
@@ -431,7 +456,7 @@ def main():
     menu()
     show_menu()
     add_book()
-    edit_book()
+    # edit_book()
     view_all_books()
     get_book_titles()
     clear_terminal()
