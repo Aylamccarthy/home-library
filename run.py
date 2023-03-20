@@ -62,7 +62,7 @@ VIEW_ALL_BOOKS = Fore.LIGHTYELLOW_EX \
 SHOW_BOOK_DETAILS = Fore.LIGHTYELLOW_EX \
                     + "This is detailed view of the book entry." \
                     + Style.RESET_ALL
-END_SCREEN = """
+END_SCREEN = Fore.LIGHTYELLOW_EX + """
 This App was developed by Ayla McCarthy as Project Portfolio 3
 for Diploma in Full Stack Software Development
 at Code Institute.
@@ -266,7 +266,7 @@ def add_book():
                                 "description")
 
         break
-    
+   
     clear_terminal()
     print(LINE)
     row = ["", title, author, category, status, description]
