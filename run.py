@@ -225,6 +225,8 @@ def add_book():
     there. After adding new book the database is re-sorted and all ID values
     are renumbered to keep ascending order in the database.
     """
+    print(ADD_BOOK)
+    print(LINE)
     
     # initialize variable to store all book details from user input
     book_to_be_added = []
@@ -427,7 +429,6 @@ def show_menu():
         # validates user input only values from 1 to 6 are allowed
         validate_user_option_input()
         if user_option == "1":
-            print(ADD_BOOK)
             add_book()
         elif user_option == "2":
             edit_book()
