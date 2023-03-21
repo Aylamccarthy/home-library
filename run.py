@@ -90,9 +90,6 @@ def logo():
             f"\nPlease use Menu below to continue." + Style.RESET_ALL)
 
 
-logo()
-
-
 def menu():
     """
     Show all the options 1-6 the user can choose from to manage their books
@@ -105,6 +102,35 @@ def menu():
     5. Show book details
     6. Exit
     """ + Style.RESET_ALL)
+
+
+def show_menu():
+    """
+    Will print menu. User is given an option between 1-6.
+    """
+    while True:
+        menu()  # prints menu
+        user_option = input(Fore.LIGHTGREEN_EX
+                            + "Please select a number from 1 to 6 "
+                              "to continue:\n "
+                            + Style.RESET_ALL)
+
+        clear_terminal()
+        # validates user input only values from 1 to 6 are allowed
+        validate_num_range(user_option, 1, 6)
+        if user_option == "1":
+            add_book()
+        elif user_option == "2":
+            edit_book()
+        elif user_option == "3":
+            print_all_database()
+        elif user_option == "4":
+            show_all_books()
+        elif user_option == "5":
+            show_book_details()
+        elif user_option == "6":
+            exit_app()
+            break
 
 
 def clear_terminal():
@@ -413,39 +439,6 @@ def exit_app():
         break
 
 
-def show_menu():
-    """
-    Will print menu. User is given an option between 1-6.
-    """
-    while True:
-        menu()  # prints menu
-        user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 6 "
-                              "to continue:\n "
-                            + Style.RESET_ALL)
-
-        clear_terminal()
-        # validates user input only values from 1 to 6 are allowed
-        validate_user_option_input()
-        if user_option == "1":
-            add_book()
-        elif user_option == "2":
-            edit_book()
-        elif user_option == "3":
-            print(VIEW_ALL_BOOKS)
-            print_all_database()
-        elif user_option == "4":
-            show_all_books()
-        elif user_option == "5":
-            show_book_details()
-        elif user_option == "6":
-            exit_app()
-            break
-
-
-show_menu()
-
-
 def main():
     """
     Main function of the program. 
@@ -453,12 +446,7 @@ def main():
     all the app functionalities.
     """
     logo()
-    menu()
     show_menu()
-    add_book()
-    # edit_book()
-    #view_all_books()
-    exit_app()
-    
+
 
 main()
