@@ -273,7 +273,7 @@ def add_book():
     row = ["", title, author, category, status, description]
     book_to_be_added.insert(0, row)
     SHEET.append_row(row)   # Append the row to the sheet
-    print("Your new book is added successfully!") 
+    print("Your new book is added successfully!")
     print(LINE)
 
 
@@ -457,13 +457,8 @@ def main():
     show_menu()
     add_book()
     # edit_book()
-    view_all_books()
-    get_book_titles()
-    clear_terminal()
+    #view_all_books()
     exit_app()
-    validate_yes_no(user_input)
-    validate_user_option_input()
-    print_all_database()
-
+    
 
 main()
