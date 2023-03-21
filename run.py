@@ -107,7 +107,6 @@ def menu():
     """ + Style.RESET_ALL)
 
 
-
 def clear_terminal():
     """
     Clears terminal for better screen readability.
