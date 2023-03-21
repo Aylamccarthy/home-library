@@ -142,25 +142,14 @@ def clear_terminal():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def validate_user_option_input():
-    """
-    Checks if the user input is between 1-6.
-    Code taken from https://stackoverflow.csom/questions/
-    and modified to suit the app.
-    """
-    
-    while True:
-        n = int(input("Please enter a number between 1 and 6: "))
-        if 1 <= n <= 6:
-            
-            break
-
-
 def database_check():
     """
     Checks if database is not empty.
     If it's empty, user is asked to add his first book.
     Majority of app functionalities are disabled if DB is empty.
+    Checks if the user input is between 1-6.
+    Code taken from https://stackoverflow.csom/questions/
+    and modified to suit the app.
     """
     while True:
         # checks if there is a record below DB headers
@@ -381,6 +370,7 @@ def show_all_books():
     if database_check():
         pass
     else:
+        print(VIEW_ALL_BOOKS)
         print(LINE)
         print_all_database()
         print(LINE)
