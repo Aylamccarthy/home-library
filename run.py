@@ -4,6 +4,7 @@ from prettytable import PrettyTable
 from colorama import Fore, Back, Style
 from art import *
 import os
+import textwrap
 
 
 SCOPE = [
