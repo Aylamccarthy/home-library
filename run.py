@@ -159,6 +159,29 @@ def wrap_text(text):
     print(wrapped_text)
 
 
+def validate_yes_no(user_input):
+    """
+    Validates Y/N inputs.
+    Prints user feedback if input is invalid.
+    :param user_input - contains user choice
+    :return True if valid input is given
+    """
+    try:
+        valid_options = ["y", "Y", "n", "N"]
+        if user_input in valid_options:
+            return True
+        else:
+            raise ValueError
+    except ValueError:
+        clear_terminal()
+        print(Fore.LIGHTRED_EX
+              + "\nWrong input, please select \"Y\" or \"N\".\n"
+              + Style.RESET_ALL)
+
+
+user_input = input()
+
+
 def renumber_id_column():
     """
     Suggestion from my mentor.
@@ -551,29 +574,6 @@ def show_all_books():
         print(LINE)
         print_all_database()
         print(LINE)
-
-
-def validate_yes_no(user_input):
-    """
-    Validates Y/N inputs.
-    Prints user feedback if input is invalid.
-    :param user_input - contains user choice
-    :return True if valid input is given
-    """
-    try:
-        valid_options = ["y", "Y", "n", "N"]
-        if user_input in valid_options:
-            return True
-        else:
-            raise ValueError
-    except ValueError:
-        clear_terminal()
-        print(Fore.LIGHTRED_EX
-              + "\nWrong input, please select \"Y\" or \"N\".\n"
-              + Style.RESET_ALL)
-
-
-user_input = input()
 
 
 def exit_app():
