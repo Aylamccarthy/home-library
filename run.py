@@ -189,7 +189,7 @@ def how_many_books():
     user hint on possible input selection, e.g. "Choose the
     ony book you have" or "Choose book from 1 to 10".
     """
-    all_books = LIBRARY.col_values(1)[1:]  # list of IDs of all books
+    all_books = SHEET.col_values(1)[1:]  # list of IDs of all books
     global first_book_id
     global last_book_id
 
@@ -518,11 +518,25 @@ def remove_book():
                               + "Wrong input, please select \"Y\" or \"N\"..."
                               + Style.RESET_ALL)
 
-
             else:
                 clear_terminal()
+                # checks how many books are in the database, if there's only
+                # one,the user is asked to select the only possible option.
+                if how_many_books():
+                    print(Fore.LIGHTRED_EX +
+                          "Wrong input!\nNot much of a choice, "
+                          "you have only one book, please select it...\n"
+                          + Style.RESET_ALL)
+                # if there is more than one book in the database,
+                # the user is given range of options, e.g. 1-10
+                elif how_many_books() is False:
+                    print(Fore.LIGHTRED_EX +
+                          f"Wrong input!\nPlease select #ID from 1 "
+                          f"to {last_book_id}.\n"
+                          + Style.RESET_ALL)
+                remove_book()
 
-
+            break
 
 
 def show_all_books():
@@ -595,7 +609,7 @@ def exit_app():
 def main():
     """
     Main function of the program. 
-    Shows App menu, where user can start and further use 
+    Shows App menu, where user can start and further use
     all the app functionalities.
     """
     logo()
