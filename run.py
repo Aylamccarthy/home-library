@@ -123,7 +123,7 @@ def show_menu():
         elif user_option == "2":
             edit_book()
         elif user_option == "3":
-            print_all_database()
+            remove_book()
         elif user_option == "4":
             show_all_books()
         elif user_option == "5":
@@ -282,6 +282,10 @@ def add_book():
                                 "description")
 
         break
+
+    # insert all collected inputs into the list
+    book_to_be_added.extend([title, author, category, status,
+                             description])
    
     clear_terminal()
     print(LINE)
@@ -360,6 +364,50 @@ def print_all_database():
 
     # Print the table
     print(table)
+
+
+def remove_book():
+    """
+    Function allows user to remove whole database entry for selected book.
+    Loop is used to ask user to select book to be removed.
+    The input is then validated. In case of wrong input,
+    user is asked to select book, e.g. 1-20.
+    User is asked to confirm choice before deletion. 
+    The input is then validated. Book is removed if
+    positive answer is given.
+    """
+    if database_check():  # checks if database is not empty
+        pass
+    else:
+        print(REMOVE_BOOK)
+        show_all_books()  # prints a list of all books in the database
+        # creates a list with all input to check agains
+        allowed_input = SHEET.col_values(1)[1:]
+
+        # The loop below is used to ask user to select book to be removed.
+        while True:
+            user_choice = input(
+                Fore.LIGHTYELLOW_EX
+                                + "\nPlease select a book to remove (#ID): "
+                                + Style.RESET_ALL
+            )
+
+            if user_choice in allowed_input:
+                # finds database row counting in list zero notation
+                db_row = int(user_choice) + 1
+                row_str = str(db_row)
+                delete_title = SHEET.acell("B" + row_str).value
+                delete_author = SHEET.acell("C" + row_str).value
+                delete_status = SHEET.acell("E" + row_str).value
+                clear_terminal()
+
+                # the condition below is used to print different message
+                # depending on book's read status
+                if delete_status == READ_YES:
+                    confirm = f"The book \"{delete_title.title()}\" by " \
+                              f"{delete_author.title()} will be removed."
+
+
 
 
 def show_all_books():
