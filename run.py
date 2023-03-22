@@ -40,6 +40,10 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 READ_YES = "Read"
 READ_NO = "Not read"
 APP = "Home Library App"
+# Initialize two values to store id's of first and last book.
+# They are used later to determine valid input range and DB length.
+first_book_id = ""
+last_book_id = ""
 
 # Description of the 6 main functions of the app.
 ADD_BOOK = Fore.LIGHTYELLOW_EX + """
@@ -141,6 +145,62 @@ def clear_terminal():
     https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     """
     os.system("cls" if os.name == "nt" else "clear")
+
+
+def wrap_text(text):
+    """
+    The function uses textwrap library to wrap long strings
+    over 79 characters to the new line. It's used to correctly display
+    books description.
+    :param text - any string
+    """
+    wrapper = textwrap.TextWrapper(width=79)
+    wrapped_text = wrapper.fill(text=text)
+    print(wrapped_text)
+
+
+def renumber_id_column():
+    """
+    Suggestion from my mentor.
+    This function will also be used to generate book ID.
+    Renumber values in column 1 in the worksheet
+    This will be used later to keep values in order
+    when book is added or removed.
+    """
+    col = SHEET.col_values(1)  # assigns values from column 1
+    new_col = col[1:]  # slices out the headers
+    id_val = 1  # allows to start ID values from 1
+    row_val = 2  # allows to start iteration from row 2
+
+    # underline used to avoid using variable without later need
+    for _ in new_col:
+        # renumbering ID value to keep order
+        SHEET.update_acell("A" + str(row_val), id_val)
+        id_val += 1
+        row_val += 1
+    print(Fore.LIGHTYELLOW_EX + "Updating database..." + Style.RESET_ALL)
+
+
+def how_many_books():
+    """
+    Checks if there is one more books in the database.
+    This will be used later in edit_book, remove_book,
+    and show_book_detais functions to conditionally give
+    user hint on possible input selection, e.g. "Choose the
+    ony book you have" or "Choose book from 1 to 10".
+    """
+    all_books = LIBRARY.col_values(1)[1:]  # list of IDs of all books
+    global first_book_id
+    global last_book_id
+
+    if len(all_books) == 1:
+        return True
+    elif len(all_books) > 1:
+        first_book_id = all_books[0]
+        last_book_id = all_books[-1]
+        return False
+
+    return first_book_id, last_book_id
 
 
 def database_check():
@@ -407,6 +467,60 @@ def remove_book():
                 if delete_status == READ_YES:
                     confirm = f"The book \"{delete_title.title()}\" by " \
                               f"{delete_author.title()} will be removed."
+                    read_status = \
+                        Fore.LIGHTGREEN_EX \
+                        + f"The book is {delete_status.lower()}." \
+                        + Style.RESET_ALL
+                    wrap_text(Fore.LIGHTYELLOW_EX + confirm + Style.RESET_ALL)
+                    print(read_status)
+
+                elif delete_status == READ_NO:
+                    confirm = f"The book \"{delete_title.title()}\" " \
+                              f"by {delete_author.title()} will be removed."
+                    read_status = \
+                        Fore.LIGHTRED_EX \
+                        + f"The book is {delete_status.lower()}." \
+                        + Style.RESET_ALL
+                    wrap_text(Fore.LIGHTYELLOW_EX + confirm + Style.RESET_ALL)
+                    print(read_status)
+
+                while True:
+                    are_you_sure = \
+                        input(Fore.LIGHTRED_EX
+                              + "\nAre you sure you want to delete "
+                                "this book? Y/N: "
+                              + Style.RESET_ALL)
+                    if validate_yes_no(are_you_sure):
+
+                        if "y" in are_you_sure or "Y" in are_you_sure:
+                            SHEET.delete_rows(db_row)
+                            clear_terminal()
+                            print(Fore.LIGHTYELLOW_EX
+                                  + "Removing book, please wait..."
+                                  + Style.RESET_ALL)
+                            renumber_id_column()
+                            print(Fore.LIGHTGREEN_EX
+                                  + "Book removed. Database updated "
+                                    "successfully."
+                                  + Style.RESET_ALL)
+                            break
+
+                        elif "n" in are_you_sure or "N" in are_you_sure:
+                            clear_terminal()
+                            print(Fore.LIGHTRED_EX
+                                  + "Aborting... Database hasn't been changed."
+                                  + Style.RESET_ALL)
+                            break
+                            
+                    else:
+                        clear_terminal()
+                        print(Fore.LIGHTRED_EX
+                              + "Wrong input, please select \"Y\" or \"N\"..."
+                              + Style.RESET_ALL)
+
+
+            else:
+                clear_terminal()
 
 
 
