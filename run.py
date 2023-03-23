@@ -381,10 +381,24 @@ def add_book():
    
     clear_terminal()
     print(LINE)
-    row = ["", title, author, category, status, description]
-    book_to_be_added.insert(0, row)
-    SHEET.append_row(row)   # Append the row to the sheet
+    first_empty_row = len(SHEET.get_all_values())
+    book_to_be_added.insert(0, first_empty_row)
     print("Your new book is added successfully!")
+    print(LINE)
+    
+    # The code below iterates through two lists using the zip method
+    # as shown in "Love Sandwiches" project.
+    # First list with database headers and second list with book details.
+    # Then it prints output for each pair. e.g. AUTHOR: "J.K. Rowling"
+    for header, item in zip(range(len(HEADERS_NO_DESC)),
+                            range(len(book_to_be_added))):
+        print(f"{HEADERS_NO_DESC[header]}: " + Fore.LIGHTGREEN_EX
+              + f"{book_to_be_added[item]}" + Style.RESET_ALL)
+
+    print(f"\n{DESCRIPTION}: ")
+    wrap_text(Fore.LIGHTGREEN_EX + book_to_be_added[-1].capitalize()
+                                 + Style.RESET_ALL)
+
     print(LINE)
 
 
