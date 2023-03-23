@@ -430,60 +430,57 @@ def add_book():
 def edit_book():
     """
     The function first checks if the database exists and is populated. 
-    If it does not, the function exits. If the database exists and is populated, 
+    If it does not, the function exits.If the database exists and is populated, 
     the function displays all books in the database, and prompts the user to 
     select a book to edit. The user is then presented with the details of
     the selected book in the form of a table, and is prompted to select
     which detail they would like to edit.The function then validates the user's
-    input. If the user enters a valid input, the function updates the database and
-    displays a success message. The user is then prompted to either keep editing 
-    the book or return to the main menu.
+    input. If the user enters a valid input, the function updates the database
+    and displays a success message. The user is then prompted to either
+    keep editing the book or return to the main menu.
     """
-    
-    data = SHEET.get_all_values()
-     #  Create a PrettyTable with the data from the sheet
-    table = PrettyTable(["Title", "Author", "Category", "Status"])
-    table.field_names = data[0]
-    row = [title, author, category, status,]
-    for row in data[1:]:
-        table.add_row(row)
+    if database_check():
+        pass
+    else:
+        allowed_input = SHEET.col_values(1)[1:]
 
-    # Print the table to the console
-    print(table)
+        while True:
+            print(EDIT_BOOK)
+            show_all_books()
+            user_choice =  input(Fore.LIGHTYELLOW_EX
+                                + "\nWhich book would you like to edit?: "
+                                + Style.RESET_ALL)
+            clear_terminal()
 
-    # Prompt the user to edit the data
-    while True:
-        row_index = input("Enter the index of the row you want to edit, or type 'q' to quit: ")
-        if row_index.lower() == 'q':
-            break
-        try:
-            row_index = int(row_index)
-            if row_index < 1 or row_index > len(data) - 1:
-                raise ValueError
-            break
-        except ValueError:
-            print("Invalid input. Please enter a number between 1 and 6 or 'q' to quit.".format(len(data) - 1))
+            if user_choice in allowed_input:
+                # finds book in the database, counting in list's zero-notation
+                db_row = int(user_choice) + 1
+                # assigns exact row to variable
+                book_id =SHEET.row_values(db_row)
+                book_description = str(book_id[-1])
+                book_no_desc = book_id[:-1]
 
-    if row_index:
-         #  Prompt the user for the updated data
-        title = input("Enter the updated title: ")
-        author = input("Enter the updated author: ")
-        category = input("Enter the updated category: ")
-        status = input("Enter the updated status: ")
-        
-        # Update the row in the sheet with the new data
-        SHEET.update_cell(row_index + 1, 1, title)
-        SHEET.update_cell(row_index + 1, 2, author)
-        SHEET.update_cell(row_index + 1, 3, category)
-        SHEET.update_cell(row_index + 1, 4, status)
-        
-        # Print the updated table to the console
-        data = SHEET.get_all_values()
-        table = PrettyTable(["Title", "Author", "Category", "Status"])
-        table.field_names = data[0]
-        for row in data[1:]:
-            table.add_row(row)
-        print(table)
+            def print_edited_book():
+                print(EDIT_BOOK)
+                print(LINE)
+                x = PrettyTable()
+                # assigns table's headers from first row in database
+                x.field_names = HEADERS_NO_DESC
+                x._max_table_width = TABLE_MAX_LEN
+                x._max_width = MAX_LEN
+                x._align["Title"] = "l"  # aligns column to the left
+                # inserts a list with book details to the table
+                x.add_rows([book_no_desc])
+                print(x) # prints table to the terminal
+                print(f"\n{DESCRIPTION}: ")
+                # book description can be longer text that will
+                # be wrapped to the new line over 79 char.
+                wrap_text(book_description)
+                print(LINE)
+                
+
+
+
 
 
 def print_all_database():
