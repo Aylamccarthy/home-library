@@ -429,8 +429,15 @@ def add_book():
 
 def edit_book():
     """
-    This function allows the user to edit a book, update the sheet with the 
-    edited data, and then print the updated data to the console.
+    The function first checks if the database exists and is populated. 
+    If it does not, the function exits. If the database exists and is populated, 
+    the function displays all books in the database, and prompts the user to 
+    select a book to edit. The user is then presented with the details of
+    the selected book in the form of a table, and is prompted to select
+    which detail they would like to edit.The function then validates the user's
+    input. If the user enters a valid input, the function updates the database and
+    displays a success message. The user is then prompted to either keep editing 
+    the book or return to the main menu.
     """
     
     data = SHEET.get_all_values()
