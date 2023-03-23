@@ -579,7 +579,7 @@ def edit_book():
                             SHEET.update_cell(db_row, 5, status)
                             clear_terminal()
                             print(Fore.LIGHTGREEN_EX
-                                 + f'Book status updated successfully '
+                                 + f'Book status updated successfully'
                                    f'to "{status.lower()}".\n'
                                  + Style.RESET_ALL)
                             print(Fore.LIGHTYELLOW_EX
@@ -589,9 +589,13 @@ def edit_book():
                             break
 
                 elif user_choice == "5":
-                    description = validate_string(
-                    DESC_MAX_LEN, "description")
-                    SHEET.update_cell(db_row, 6, description.capitalize())
+                    description = \
+                            validate_string(Fore.LIGHTCYAN_EX 
+                        + "Please update book's description:"
+                        + Style.RESET_ALL, DESC_MAX_LEN,
+                                            "description")
+                    SHEET.update_cell(db_row, 6,
+                                    description.capitalize())
                     book_description = description.capitalize()
                     clear_terminal()
                     print(Fore.LIGHTGREEN_EX
@@ -600,6 +604,7 @@ def edit_book():
                     print(Fore.LIGHTYELLOW_EX
                               + "Keep editing this book or return."
                               + Style.RESET_ALL)
+                    
                 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
