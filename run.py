@@ -749,11 +749,10 @@ def show_all_books():
     if database_check():
         pass
     else:
-        print(LINE)
         print(VIEW_ALL_BOOKS)
         print(LINE)
-        
-        
+        print_all_database()
+        print(LINE)
 
 
 def exit_app():
