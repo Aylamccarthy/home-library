@@ -604,23 +604,11 @@ def edit_book():
                     print(Fore.LIGHTYELLOW_EX
                               + "Keep editing this book or return."
                               + Style.RESET_ALL)
-                    
-                
+                          
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
                     show_all_books()
                     break
-
-                
-                
-
-
-                   
-
-                
-
-
-
 
 
 def print_all_database():
