@@ -380,10 +380,9 @@ def add_book():
                              description])
    
     clear_terminal()
-    print(LINE)
+    print("Here's the details of your new book:" )
     first_empty_row = len(SHEET.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
-    print("Your new book is added successfully!")
     print(LINE)
     
     # The code below iterates through two lists using the zip method
@@ -401,6 +400,32 @@ def add_book():
 
     print(LINE)
 
+    # The code below prompts the user to confirm if they want to add
+    # book to the database. If the answer is yes, it adds the book to the
+    # database. If no, the process is aborted and the book
+    # will not be added to the database.
+
+    while True:
+        are_you_sure = input(Fore.LIGHTYELLOW_EX
+                             + " \nConfirm adding this book. Y/N: "
+                             + Style.RESET_ALL)
+        if validate_yes_no(are_you_sure):
+
+            if "y" in are_you_sure or "Y" in are_you_sure:
+                clear_terminal()
+                SHEET.append_row(book_to_be_added)
+                print(Fore.LIGHTYELLOW_EX + "Adding book to the database..."
+                                          + "\n Updating database. Please wait..."
+                                          + "\n Book added successfully."
+                                          + Style.RESET_ALL)
+                break
+            # negative answer breaks the loop and takes user back
+            elif "n" in are_you_sure or "N" in are_you_sure:
+                clear_terminal()
+                print(Fore.LIGHTRED_EX + "Aborting... Book has not been added."
+                      + Style.RESET_ALL)
+                break
+    
 
 def edit_book():
     """
