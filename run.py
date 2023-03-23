@@ -380,7 +380,7 @@ def add_book():
                              description])
    
     clear_terminal()
-    print("Here's the details of your new book:" )
+    print("Here's the details of your new book:")
     first_empty_row = len(SHEET.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
     print(LINE)
@@ -429,7 +429,7 @@ def add_book():
 
 def edit_book():
     """
-    The function first checks if the database exists and is populated. 
+    The function first checks if the database exists and is populated.
     If it does not, the function exits.If the database exists and is populated, 
     the function displays all books in the database, and prompts the user to 
     select a book to edit. The user is then presented with the details of
@@ -447,7 +447,7 @@ def edit_book():
         while True:
             print(EDIT_BOOK)
             show_all_books()
-            user_choice =  input(Fore.LIGHTYELLOW_EX
+            user_choice = input(Fore.LIGHTYELLOW_EX
                                 + "\nWhich book would you like to edit?: "
                                 + Style.RESET_ALL)
             clear_terminal()
@@ -471,12 +471,147 @@ def edit_book():
                 x._align["Title"] = "l"  # aligns column to the left
                 # inserts a list with book details to the table
                 x.add_rows([book_no_desc])
-                print(x) # prints table to the terminal
+                print(x)  # prints table to the terminal
                 print(f"\n{DESCRIPTION}: ")
                 # book description can be longer text that will
-                # be wrapped to the new line over 79 char.
+                # be wrapped to the new line over 79 characters.
                 wrap_text(book_description)
                 print(LINE)
+            
+            # The code below will allow the user to choose what data
+            # he wants to edit, i.e, Title, Author, etc.
+            while True:
+                print_edited_book()
+                print(Fore.LIGHTGREEN_EX + """
+                1. Title 
+                2. Author
+                3. Category
+                4. Status
+                5. Description
+                6. Return 
+                """ + Style.RESET_ALL)
+                user_choice = input(Fore.LIGHTYELLOW_EX
+                                        + "What do you want to edit? "
+                                          "Select 1-6: "
+                                        + Style.RESET_ALL)
+                validate_num_range(user_choice, 1, 6)
+
+                if user_choice == "1":
+                    title = validate_string(Fore.LIGHTCYAN_EX
+                    + "Please update book's title: "
+                    + Style.RESET_ALL, TITLE_MAX_LEN,"Title"
+                    )
+                    book_no_desc[1] = title.title()
+                    SHEET.update_cell(db_row, 2, title.title())
+                    print(Fore.LIGHTYELLOW_EX + "Updating database..."
+                              + Style.RESET_ALL)
+                    clear_terminal()
+                    print(Fore.LIGHTGREEN_EX
+                              + f'Book title updated successfully to '
+                                f'"{title.title()}".\n'
+                              + Style.RESET_ALL)
+                    print(Fore.LIGHTYELLOW_EX
+                              + "Keep editing this book or return to "
+                                "main menu."
+                              + Style.RESET_ALL)
+
+                elif user_choice == "2":
+                    author = validate_string(Fore.LIGHTCYAN_EX
+                    + "Please update book's author"
+                    + Style.RESET_ALL, TITLE_MAX_LEN,"author")
+                    book_no_desc[2] = author.title()
+                    SHEET.update_cell(db_row, 3, author.title())
+                    clear_terminal()
+                    print(
+                        Fore.LIGHTGREEN_EX
+                        + f'Book author updated successfully'
+                          f'to "{author.title()}".\n'
+                        + Style.RESET_ALL)
+                    print(Fore.LIGHTYELLOW_EX 
+                        + "Keep editing this book "
+                          "or return to main menu."
+                        + Style.RESET_ALL)
+
+                elif user_choice == "3":
+                    category = validate_string(
+                        Fore.LIGHTCYAN_EX 
+                        + "Please update books category:"
+                        + Style.RESET_ALL, CAT_MAX_LEN, "category")
+                    book_no_desc[3] = category.capitalize()
+                    SHEET.update_cell(db_row, 4, category.capitalize())
+                    clear_terminal()
+                    print(
+                            Fore.LIGHTGREEN_EX
+                            + f'Book category updated successfully '
+                              f'to "{category.capitalize()}".\n'
+                            + Style.RESET_ALL)
+                    print(Fore.LIGHTYELLOW_EX
+                         + "Keep editing this  book or"
+                            "return to main menu."
+                         + Style.RESET_ALL)
+
+                elif user_choice == "4":
+                    while True:
+                        select_status = input(
+                                Fore.LIGHTCYAN_EX
+                                + "Please select \"1\" if you read that book "
+                                  "or \"2\" if you didn't: "
+                                + Style.RESET_ALL)
+                    if validate_num_range(select_status, 1, 2):
+                        if select_status == "1":
+                            status = READ_YES
+                            book_no_desc[4] = status
+                            SHEET.update_cell(db_row, 5, status)
+                            clear_terminal()
+                            print(
+                                Fore.LIGHTGREEN_EX
+                                + f'Book status updated successfully '
+                                  f'to "{status.lower()}".\n'
+                                + Style.RESET_ALL)
+                            print(Fore.LIGHTYELLOW_EX
+                                + "Keep editing this book or return "
+                                  "to main menu."
+                                + Style.RESET_ALL)
+                            break
+                        elif select_status == "2":
+                            status = READ_NO
+                            book_no_desc[4] = status
+                            SHEET.update_cell(db_row, 5, status)
+                            clear_terminal()
+                            print(Fore.LIGHTGREEN_EX
+                                 + f'Book status updated successfully '
+                                   f'to "{status.lower()}".\n'
+                                 + Style.RESET_ALL)
+                            print(Fore.LIGHTYELLOW_EX
+                                 + "Keep editing this book or return "
+                                   "to main menu."
+                                 + Style.RESET_ALL)
+                            break
+
+                elif user_choice == "5":
+                    description = validate_string(
+                    DESC_MAX_LEN, "description")
+                    SHEET.update_cell(db_row, 6, description.capitalize())
+                    book_description = description.capitalize()
+                    clear_terminal()
+                    print(Fore.LIGHTGREEN_EX
+                              + f"Book description updated successfully.\n"
+                              + Style.RESET_ALL)
+                    print(Fore.LIGHTYELLOW_EX
+                              + "Keep editing this book or return."
+                              + Style.RESET_ALL)
+                
+                elif user_choice == "6":  # returns to previous menu
+                    clear_terminal()
+                    show_all_books()
+                    break
+
+                
+                
+
+
+                   
+
                 
 
 

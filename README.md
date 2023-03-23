@@ -52,8 +52,10 @@ As a user I would like to:
 
 
 ## Bugs
-print data base using prettytable. I found this bug so challenging but eventually managed to solve it after days of research.
+To print data base using prettytable. I found this bug so challenging but eventually managed to solve it after days of research.
 The book IDs in the database would not generate automatically as expected.
+
+Validation on edit_book function is not working as expected
 
 
 
