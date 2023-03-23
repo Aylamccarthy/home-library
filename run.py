@@ -21,6 +21,17 @@ SHEET = GSPREAD_CLIENT.open('home_library').sheet1
 # Get the data from the sheet as a list of lists
 data = SHEET.get_all_values()
 
+# App constants
+HEADERS = SHEET.row_values(1)
+HEADERS_NO_DESC = HEADERS[:-1]
+HEADERS_NO_DESC_NO_ID = HEADERS[:-1]
+DESCRIPTION = SHEET.row_values(1).pop()
+ALL_VALUES = SHEET.get_all_values()
+ALL_VALUES_NO_HEADER = ALL_VALUES[1:]
+APP = "Home Library App"
+# Reading status
+READ_YES = "Read"
+READ_NO = "Not read"
 
 # PrettyTable columns width
 MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 12, "Status": 8}
@@ -36,10 +47,7 @@ CAT_MAX_LEN = MAX_LEN["Category"]
 DESC_MAX_LEN = 200
 # Separator line
 LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
-# Reading status
-READ_YES = "Read"
-READ_NO = "Not read"
-APP = "Home Library App"
+
 # Initialize two values to store id's of first and last book.
 # They are used later to determine valid input range and DB length.
 first_book_id = ""
