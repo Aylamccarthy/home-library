@@ -414,9 +414,9 @@ def add_book():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 SHEET.append_row(book_to_be_added)
-                print(Fore.LIGHTYELLOW_EX + "Adding book to the database..."
-                                          + "\n Updating database. Please wait..."
-                                          + "\n Book added successfully."
+                print(Fore.LIGHTYELLOW_EX + "\nAdding book to the database..."
+                                          + "\nUpdating database. Please wait..."
+                                          + "\nBook added successfully."
                                           + Style.RESET_ALL)
                 break
             # negative answer breaks the loop and takes user back
