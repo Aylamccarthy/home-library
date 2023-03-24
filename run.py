@@ -1,10 +1,10 @@
+import os
+import textwrap
 import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 from art import *
-import os
-import textwrap
 
 
 SCOPE = [
@@ -50,37 +50,37 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 
 # Initialize two values to store id's of first and last book.
 # They are used later to determine valid input range and DB length.
-first_book_id = ""
-last_book_id = ""
+FIRST_BOOK_ID = ""
+LAST_BOOK_ID = ""
 
 # Description of the 6 main functions of the App.
-ADD_BOOK = Fore.LIGHTYELLOW_EX + """
+ADD_BOOK = Fore.WHITE + """
 Now you can add a new book to your library. \n
 You will be asked to enter book title, author, category and status.
 Choose if you have read the book or not. Book ID is generated automatically.
 """ + Style.RESET_ALL
 
-EDIT_BOOK = Fore.LIGHTYELLOW_EX \
+EDIT_BOOK = Fore.WHITE \
             + "You can update all book details below." \
             + Style.RESET_ALL
 
-REMOVE_BOOK = Fore.LIGHTYELLOW_EX \
+REMOVE_BOOK = Fore.WHITE \
               + "Here you can remove selected book from the database." \
               + Style.RESET_ALL
 
-VIEW_ALL_BOOKS = Fore.LIGHTYELLOW_EX \
-                 + f"This is the list of all your books." \
+VIEW_ALL_BOOKS = Fore.WHITE \
+                 + "This is the list of all your books." \
                  + Style.RESET_ALL
 
-SHOW_BOOK_DETAILS = Fore.LIGHTYELLOW_EX \
+SHOW_BOOK_DETAILS = Fore.WHITE \
                     + "This is detailed view of the book entry." \
                     + Style.RESET_ALL
-END_SCREEN = Fore.LIGHTYELLOW_EX + """
+END_SCREEN = Fore.WHITE + """
 This App was developed by Ayla McCarthy as Project Portfolio 3
 for Diploma in Full Stack Software Development
 at Code Institute.
 
-Visit my profiles: 
+Visit my profiles:
 https://github.com/aylamccarthy
 https://www.linkedin.com/in/aylamccarthy/
 """ + Style.RESET_ALL
@@ -92,7 +92,7 @@ def logo():
     """
     print(Fore.LIGHTCYAN_EX + """
      _   _                        _     _ _                          
-    | | | | ___  _ __ ___   ___  | |   (_) |__  _ __ __ _ _ __ _   _ 
+    | | | | ___  _ __ ___   ___  | |   (_) |__  _ __ __ _ _ __ _   _
     | |_| |/ _ \| '_ ` _ \ / _ \ | |   | | '_ \| '__/ _` | '__| | | |
     |  _  | (_) | | | | | |  __/ | |___| | |_) | | | (_| | |  | |_| |
     |_| |_|\___/|_| |_| |_|\___| |_____|_|_.__/|_|  \__,_|_|   \__, |
@@ -121,7 +121,6 @@ def show_menu():
     """
     Will print menu. Which contains the six main functionalities of
     the app. User is given an option between 1-6.
-   
     """
     while True:
         menu()  # prints menu
@@ -131,7 +130,7 @@ def show_menu():
                             + Style.RESET_ALL)
 
         clear_terminal()
-        # validates user input only values from 1 to 6 are allowed
+        # validates user input, only values from 1 to 6 are allowed
         validate_num_range(user_option, 1, 6)
         if user_option == "1":
             add_book()
@@ -142,7 +141,7 @@ def show_menu():
         elif user_option == "4":
             show_all_books()
         elif user_option == "5":
-            show_book_details()
+            view_book_details()
         elif user_option == "6":
             exit_app()
             break
@@ -195,22 +194,22 @@ user_input = input()
 def renumber_id_column():
     """
     Suggestion from my mentor.
-    This function will also be used to generate book ID.
+    This function will also be used to generate book IDs.
     Renumber values in column 1 in the worksheet
     This will be used later to keep values in order
     when book is added or removed.
     """
     col = SHEET.col_values(1)  # assigns values from column 1
     new_col = col[1:]  # slices out the headers
-    id_val = 1  # allows to start ID values from 1
-    row_val = 2  # allows to start iteration from row 2
+    id_value = 1  # allows to start ID values from 1
+    row_value = 2  # allows to start iteration from row 2
 
-    # underline used to avoid using variable without later need
+    # "_" is used to avoid using variable without later need
     for _ in new_col:
-        # renumbering ID value to keep order
-        SHEET.update_acell("A" + str(row_val), id_val)
-        id_val += 1
-        row_val += 1
+        # renumbering ID values
+        SHEET.update_acell("A" + str(row_value), id_value)
+        id_value += 1
+        row_value += 1
     print(Fore.LIGHTYELLOW_EX + "Updating database..." + Style.RESET_ALL)
 
 
@@ -223,18 +222,19 @@ def how_many_books():
     ony book you have" or "Choose book from 1 to 10".
     """
     all_books = SHEET.col_values(1)[1:]  # list of IDs of all books
-    # using global keyword, taken https://www.w3schools.com/python/python_scope.asp
-    global first_book_id 
-    global last_book_id
+    # using global keyword,
+    # taken from https://www.w3schools.com/python/python_scope.asp
+    global FIRST_BOOK_ID
+    global LAST_BOOK_ID
 
     if len(all_books) == 1:
         return True
     elif len(all_books) > 1:
-        first_book_id = all_books[0]
-        last_book_id = all_books[-1]
+        FIRST_BOOK_ID = all_books[0]
+        LAST_BOOK_ID = all_books[-1]
         return False
 
-    return first_book_id, last_book_id
+    return FIRST_BOOK_ID, LAST_BOOK_ID
 
 
 def database_check():
@@ -336,7 +336,7 @@ def add_book():
     """
     print(ADD_BOOK)
     print(LINE)
-    
+
     # initialize variable to store all book details from user input
     book_to_be_added = []
 
@@ -381,13 +381,12 @@ def add_book():
     # insert all collected inputs into the list
     book_to_be_added.extend([title, author, category, status,
                              description])
-   
     clear_terminal()
     print("Here's the details of your new book:")
     first_empty_row = len(SHEET.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
     print(LINE)
-    
+
     # The code below iterates through two lists using the zip method
     # as shown in "Love Sandwiches" project.
     # First list with database headers and second list with book details.
@@ -417,10 +416,11 @@ def add_book():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 SHEET.append_row(book_to_be_added)
-                print(Fore.LIGHTYELLOW_EX + "\nAdding book to the database..."
-                                          + "\nUpdating database. Please wait..."
-                                          + "\nBook added successfully."
-                                          + Style.RESET_ALL)
+                print(Fore.LIGHTYELLOW_EX
+                      + "\nAdding book to the database..."
+                      + "\nUpdating database. Please wait..."
+                      + "\nBook added successfully."
+                      + Style.RESET_ALL)
                 break
             # negative answer breaks the loop and takes user back
             elif "n" in are_you_sure or "N" in are_you_sure:
@@ -428,7 +428,7 @@ def add_book():
                 print(Fore.LIGHTRED_EX + "Aborting... Book has not been added."
                       + Style.RESET_ALL)
                 break
-    
+
 
 def edit_book():
     """
@@ -480,48 +480,48 @@ def edit_book():
                 # be wrapped to the new line over 79 characters.
                 wrap_text(book_description)
                 print(LINE)
-            
+
             # The code below will allow the user to choose what data
             # he wants to edit, i.e, Title, Author, etc.
             while True:
                 print_edited_book()
                 print(Fore.LIGHTGREEN_EX + """
-                1. Title 
+                1. Title
                 2. Author
                 3. Category
                 4. Status
                 5. Description
-                6. Return 
+                6. Return
                 """ + Style.RESET_ALL)
                 user_choice = input(Fore.LIGHTYELLOW_EX
-                                        + "What do you want to edit? "
-                                          "Select 1-6: "
-                                        + Style.RESET_ALL)
+                                    + "What do you want to edit? "
+                                      "Select 1-6: "
+                                    + Style.RESET_ALL)
                 validate_num_range(user_choice, 1, 6)
 
                 if user_choice == "1":
                     title = validate_string(Fore.LIGHTCYAN_EX
-                    + "Please update book's title: "
-                    + Style.RESET_ALL, TITLE_MAX_LEN,"Title"
-                    )
+                                            + "Please update book's title: "
+                                            + Style.RESET_ALL, TITLE_MAX_LEN, "Title")
                     book_no_desc[1] = title.title()
                     SHEET.update_cell(db_row, 2, title.title())
                     print(Fore.LIGHTYELLOW_EX + "Updating database..."
-                              + Style.RESET_ALL)
+                          + Style.RESET_ALL)
                     clear_terminal()
                     print(Fore.LIGHTGREEN_EX
-                              + f'Book title updated successfully to '
-                                f'"{title.title()}".\n'
-                              + Style.RESET_ALL)
+                          + f'Book title updated successfully to '
+                            f'"{title.title()}".\n'
+                          + Style.RESET_ALL)
                     print(Fore.LIGHTYELLOW_EX
-                              + "Keep editing this book or return to "
-                                "main menu."
-                              + Style.RESET_ALL)
+                          + "Keep editing this book or return to "
+                            "main menu."
+                          + Style.RESET_ALL)
 
                 elif user_choice == "2":
                     author = validate_string(Fore.LIGHTCYAN_EX
-                    + "Please update book's author"
-                    + Style.RESET_ALL, TITLE_MAX_LEN,"author")
+                                             + "Please update book's author"
+                                             + Style.RESET_ALL, TITLE_MAX_LEN,
+                                             "author")
                     book_no_desc[2] = author.title()
                     SHEET.update_cell(db_row, 3, author.title())
                     clear_terminal()
@@ -531,9 +531,9 @@ def edit_book():
                           f'to "{author.title()}".\n'
                         + Style.RESET_ALL)
                     print(Fore.LIGHTYELLOW_EX 
-                        + "Keep editing this book "
-                          "or return to main menu."
-                        + Style.RESET_ALL)
+                          + "Keep editing this book "
+                            "or return to main menu."
+                          + Style.RESET_ALL)
 
                 elif user_choice == "3":
                     category = validate_string(
@@ -549,9 +549,9 @@ def edit_book():
                               f'to "{category.capitalize()}".\n'
                             + Style.RESET_ALL)
                     print(Fore.LIGHTYELLOW_EX
-                         + "Keep editing this  book or"
+                          + "Keep editing this  book or"
                             "return to main menu."
-                         + Style.RESET_ALL)
+                          + Style.RESET_ALL)
 
                 elif user_choice == "4":
                     while True:
@@ -572,9 +572,9 @@ def edit_book():
                                   f'to "{status.lower()}".\n'
                                 + Style.RESET_ALL)
                             print(Fore.LIGHTYELLOW_EX
-                                + "Keep editing this book or return "
+                                  + "Keep editing this book or return "
                                   "to main menu."
-                                + Style.RESET_ALL)
+                                  + Style.RESET_ALL)
                             break
                         elif select_status == "2":
                             status = READ_NO
@@ -582,30 +582,31 @@ def edit_book():
                             SHEET.update_cell(db_row, 5, status)
                             clear_terminal()
                             print(Fore.LIGHTGREEN_EX
-                                 + f'Book status updated successfully'
-                                   f'to "{status.lower()}".\n'
-                                 + Style.RESET_ALL)
+                                  + f'Book status updated successfully'
+                                    f'to "{status.lower()}".\n'
+                                  + Style.RESET_ALL)
                             print(Fore.LIGHTYELLOW_EX
-                                 + "Keep editing this book or return "
-                                   "to main menu."
-                                 + Style.RESET_ALL)
+                                  + "Keep editing this book or return "
+                                    "to main menu."
+                                  + Style.RESET_ALL)
                             break
 
                 elif user_choice == "5":
                     description = \
-                            validate_string(Fore.LIGHTCYAN_EX 
-                        + "Please update book's description:"
-                        + Style.RESET_ALL, DESC_MAX_LEN,
+                            validate_string(Fore.LIGHTCYAN_EX
+                                            + "Please update book's"
+                                              "description:"
+                                            + Style.RESET_ALL, DESC_MAX_LEN,
                                             "description")
                     SHEET.update_cell(db_row, 6, description.capitalize())
                     book_description = description.capitalize()
                     clear_terminal()
                     print(Fore.LIGHTGREEN_EX
-                              + f"Book description updated successfully.\n"
-                              + Style.RESET_ALL)
+                          + "Book description updated successfully.\n"
+                          + Style.RESET_ALL)
                     print(Fore.LIGHTYELLOW_EX
-                              + "Keep editing this book or return."
-                              + Style.RESET_ALL)
+                          + "Keep editing this book or return."
+                          + Style.RESET_ALL)
                           
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
@@ -637,7 +638,7 @@ def remove_book():
     Loop is used to ask user to select book to be removed.
     The input is then validated. In case of wrong input,
     user is asked to select book, e.g. 1-20.
-    User is asked to confirm choice before deletion. 
+    User is asked to confirm choice before deletion.
     The input is then validated. Book is removed if
     positive answer is given.
     """
@@ -646,21 +647,19 @@ def remove_book():
     else:
         print(REMOVE_BOOK)
         show_all_books()  # prints a list of all books in the database
-        # creates a list with all input to check agains
+        # creates a list with all input to check against
         allowed_input = SHEET.col_values(1)[1:]
 
         # The loop below is used to ask user to select book to be removed.
         while True:
-            user_choice = input(
-                Fore.LIGHTYELLOW_EX
+            user_choice = input(Fore.LIGHTYELLOW_EX
                                 + "\nPlease select a book to remove (#ID): "
-                                + Style.RESET_ALL
-            )
+                                + Style.RESET_ALL)
 
             if user_choice in allowed_input:
                 # finds database row counting in list zero notation
                 db_row = int(user_choice) + 1
-                row_str = str(db_row)
+                row_str = str(db_row)  # converts  back to string
                 delete_title = SHEET.acell("B" + row_str).value
                 delete_author = SHEET.acell("C" + row_str).value
                 delete_status = SHEET.acell("E" + row_str).value
@@ -715,7 +714,7 @@ def remove_book():
                                   + "Aborting... Database hasn't been changed."
                                   + Style.RESET_ALL)
                             break
-                            
+                                                 
                     else:
                         clear_terminal()
                         print(Fore.LIGHTRED_EX
@@ -728,7 +727,7 @@ def remove_book():
                 # one,the user is asked to select the only possible option.
                 if how_many_books():
                     print(Fore.LIGHTRED_EX +
-                          "Wrong input!\nNot much of a choice, "
+                          "Wrong input!\n, "
                           "you have only one book, please select it...\n"
                           + Style.RESET_ALL)
                 # if there is more than one book in the database,
@@ -736,7 +735,7 @@ def remove_book():
                 elif how_many_books() is False:
                     print(Fore.LIGHTRED_EX +
                           f"Wrong input!\nPlease select #ID from 1 "
-                          f"to {last_book_id}.\n"
+                          f"to {LAST_BOOK_ID}.\n"
                           + Style.RESET_ALL)
                 remove_book()
 
@@ -757,7 +756,7 @@ def show_all_books():
         print(LINE)
 
 
-def show_book_details():
+def view_book_details():
     """
     Allows user to select a book and view its particular details.
     It checks first if the database is empty,if it's not, calls
@@ -769,8 +768,21 @@ def show_book_details():
     If the user input is invalid it will keep running until a
     valid input is provided.
     """
+    if database_check():
+        pass
+    else:
+        show_all_books()
+        allowed_input = SHEET.col_values(1)[1:]
 
-    
+        while True:
+            user_choice = input(Fore.LIGHTCYAN_EX
+                                + "Which book would you like to see?"
+                                + Style.RESET_ALL)
+
+            if user_choice in allowed_input:
+                db_row = int(user_choice) + 1
+                book_id = SHEET.row_values(db_row)
+
 
 def exit_app():
     """
@@ -804,7 +816,7 @@ def exit_app():
 
 def main():
     """
-    Main function of the program. 
+    Main function of the program
     Shows App menu, where user can start and further use
     all the app functionalities.
     """
