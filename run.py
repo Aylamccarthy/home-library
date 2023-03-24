@@ -119,7 +119,9 @@ def menu():
 
 def show_menu():
     """
-    Will print menu. User is given an option between 1-6.
+    Will print menu. Which contains the six main functionalities of
+    the app. User is given an option between 1-6.
+   
     """
     while True:
         menu()  # prints menu
@@ -457,7 +459,7 @@ def edit_book():
                 # finds book in the database, counting in list's zero-notation
                 db_row = int(user_choice) + 1
                 # assigns exact row to variable
-                book_id =SHEET.row_values(db_row)
+                book_id = SHEET.row_values(db_row)
                 book_description = str(book_id[-1])
                 book_no_desc = book_id[:-1]
 
@@ -595,8 +597,7 @@ def edit_book():
                         + "Please update book's description:"
                         + Style.RESET_ALL, DESC_MAX_LEN,
                                             "description")
-                    SHEET.update_cell(db_row, 6,
-                                    description.capitalize())
+                    SHEET.update_cell(db_row, 6, description.capitalize())
                     book_description = description.capitalize()
                     clear_terminal()
                     print(Fore.LIGHTGREEN_EX
@@ -755,6 +756,21 @@ def show_all_books():
         print_all_database()
         print(LINE)
 
+
+def show_book_details():
+    """
+    Allows user to select a book and view its particular details.
+    It checks first if the database is empty,if it's not, calls
+    the show_all_books() function to display all books in the
+    database. Then creates a list of possible inputs and enters
+    a while loop that keeps asking the user which book they wish
+    to see details for. If the user input is valid, book details 
+    from the database will be displayed using prettyTable.
+    If the user input is invalid it will keep running until a
+    valid input is provided.
+    """
+
+    
 
 def exit_app():
     """
