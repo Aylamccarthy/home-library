@@ -107,7 +107,7 @@ def menu():
     """
     Show all the options 1-6 the user can choose from to manage their books
     """
-    print(Fore.BLUE + """
+    print(Fore.WHITE + """
     1. Add book
     2. Edit book
     3. Remove book
