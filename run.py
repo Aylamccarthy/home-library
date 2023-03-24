@@ -21,7 +21,7 @@ SHEET = GSPREAD_CLIENT.open('home_library').sheet1
 # Get the data from the sheet as a list of lists
 data = SHEET.get_all_values()
 
-# App constants
+# App constants to be used throughout the App
 HEADERS = SHEET.row_values(1)
 HEADERS_NO_DESC = HEADERS[:-1]
 HEADERS_NO_DESC_NO_ID = HEADERS[:-1]
@@ -53,7 +53,7 @@ LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 first_book_id = ""
 last_book_id = ""
 
-# Description of the 6 main functions of the app.
+# Description of the 6 main functions of the App.
 ADD_BOOK = Fore.LIGHTYELLOW_EX + """
 Now you can add a new book to your library. \n
 You will be asked to enter book title, author, category and status.
@@ -221,7 +221,8 @@ def how_many_books():
     ony book you have" or "Choose book from 1 to 10".
     """
     all_books = SHEET.col_values(1)[1:]  # list of IDs of all books
-    global first_book_id
+    # using global keyword, taken https://www.w3schools.com/python/python_scope.asp
+    global first_book_id 
     global last_book_id
 
     if len(all_books) == 1:
