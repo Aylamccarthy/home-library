@@ -66,6 +66,7 @@ Validation on edit_book function is not working as expected
 Code Institute "Love Sandwiches" and learning platform
 Code Institute Slack Community for unparalled support and knowledge base.
 My mentor Gareth McGirr for all the support, guidance and suggestions throughout the building of this project.
+Python Library Management System Project - Full Tutorial#39 | Programming is Fun
 12 Python Project for Beginners.freeCodeCamp.Org
 Python Tutorial for Beginners- Kevin Stratvert | Full Python Course 
 Learn Python in 2023 - TechWorld with Nana

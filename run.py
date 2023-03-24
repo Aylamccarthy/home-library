@@ -464,7 +464,7 @@ def edit_book():
             def print_edited_book():
                 print(EDIT_BOOK)
                 print(LINE)
-                x = PrettyTable()
+                x = PrettyTable()  # https://pypi.org/project/prettytable/
                 # assigns table's headers from first row in database
                 x.field_names = HEADERS_NO_DESC
                 x._max_table_width = TABLE_MAX_LEN
