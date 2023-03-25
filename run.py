@@ -159,7 +159,7 @@ def clear_terminal():
 def wrap_text(text):
     """
     The function uses textwrap library to wrap long strings
-    over 79 characters to the new line. It's used to correctly display
+    over 79 characters to the new line. It will be used to correctly display
     books description.
     :param text - any string
     """
@@ -747,8 +747,9 @@ def remove_book():
 
 def show_all_books():
     """
-     Prints to the terminal a list of all books stored in the database.
-     If database is empty database_check() prompts user to add first book.
+     Checks first if the database is not empty.
+     If it's not, it will display all the books in the
+     database to the user.
     """
     if database_check():
         pass
@@ -779,12 +780,14 @@ def view_book_details():
 
         while True:
             user_choice = input(Fore.LIGHTCYAN_EX
-                                + "Which book would you like to see?"
+                                + "Which book would you like to view?"
                                 + Style.RESET_ALL)
 
             if user_choice in allowed_input:
                 db_row = int(user_choice) + 1
                 book_id = SHEET.row_values(db_row)
+                book_to_view = book_id[:-1]
+                book_description = str(book_id[-1])
 
 
 def exit_app():
