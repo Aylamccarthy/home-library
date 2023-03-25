@@ -149,7 +149,7 @@ def show_menu():
 
 def clear_terminal():
     """
-    Clears terminal for better screen readability.
+    Clears terminal window for better screen readability.
     Method found on StackOverflow:
     https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     """
@@ -502,7 +502,7 @@ def update_book():
                 if user_choice == "1":
                     title = validate_string(Fore.LIGHTCYAN_EX
                                             + "Please update book's title: "
-                                            + Style.RESET_ALL, 
+                                            + Style.RESET_ALL,
                                               TITLE_MAX_LEN, "Title")
                     book_no_desc[1] = title.title()
                     SHEET.update_cell(db_row, 2, title.title())
