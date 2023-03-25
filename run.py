@@ -60,7 +60,7 @@ You will be asked to enter book title, author, category and status.
 Choose if you have read the book or not. Book ID is generated automatically.
 """ + Style.RESET_ALL
 
-EDIT_BOOK = Fore.WHITE \
+UPDATE_BOOK = Fore.WHITE \
             + "You can update all book details below." \
             + Style.RESET_ALL
 
@@ -68,7 +68,7 @@ REMOVE_BOOK = Fore.WHITE \
               + "Here you can remove selected book from the database." \
               + Style.RESET_ALL
 
-VIEW_ALL_BOOKS = Fore.WHITE \
+SHOW_ALL_BOOKS = Fore.WHITE \
                  + "This is the list of all your books." \
                  + Style.RESET_ALL
 
@@ -109,7 +109,7 @@ def menu():
     """
     print(Fore.WHITE + """
     1. Add book
-    2. Edit book
+    2. Update book
     3. Remove book
     4. View all books
     5. Show book details
@@ -135,7 +135,7 @@ def show_menu():
         if user_option == "1":
             add_book()
         elif user_option == "2":
-            edit_book()
+            update_book()
         elif user_option == "3":
             remove_book()
         elif user_option == "4":
@@ -194,7 +194,7 @@ user_input = input()
 def renumber_id_column():
     """
     Suggestion from my mentor.
-    This function will also be used to generate book IDs.
+    This function will be used to generate book IDs.
     Renumber values in column 1 in the worksheet
     This will be used later to keep values in order
     when book is added or removed.
@@ -430,7 +430,7 @@ def add_book():
                 break
 
 
-def edit_book():
+def update_book():
     """
     The function first checks if the database exists and is populated.
     If it does not, the function exits.If the database exists and is populated, 
@@ -448,7 +448,7 @@ def edit_book():
         allowed_input = SHEET.col_values(1)[1:]
 
         while True:
-            print(EDIT_BOOK)
+            print(UPDATE_BOOK)
             show_all_books()
             user_choice = input(Fore.LIGHTYELLOW_EX
                                 + "\nWhich book would you like to edit?: "
@@ -463,8 +463,8 @@ def edit_book():
                 book_description = str(book_id[-1])
                 book_no_desc = book_id[:-1]
 
-            def print_edited_book():
-                print(EDIT_BOOK)
+            def print_updated_book():
+                print(UPDATE_BOOK)
                 print(LINE)
                 x = PrettyTable()  # https://pypi.org/project/prettytable/
                 # assigns table's headers from first row in database
@@ -484,7 +484,7 @@ def edit_book():
             # The code below will allow the user to choose what data
             # he wants to edit, i.e, Title, Author, etc.
             while True:
-                print_edited_book()
+                print_updated_book()
                 print(Fore.LIGHTGREEN_EX + """
                 1. Title
                 2. Author
@@ -502,7 +502,8 @@ def edit_book():
                 if user_choice == "1":
                     title = validate_string(Fore.LIGHTCYAN_EX
                                             + "Please update book's title: "
-                                            + Style.RESET_ALL, TITLE_MAX_LEN, "Title")
+                                            + Style.RESET_ALL, 
+                                              TITLE_MAX_LEN, "Title")
                     book_no_desc[1] = title.title()
                     SHEET.update_cell(db_row, 2, title.title())
                     print(Fore.LIGHTYELLOW_EX + "Updating database..."
@@ -530,14 +531,14 @@ def edit_book():
                         + f'Book author updated successfully'
                           f'to "{author.title()}".\n'
                         + Style.RESET_ALL)
-                    print(Fore.LIGHTYELLOW_EX 
+                    print(Fore.LIGHTYELLOW_EX
                           + "Keep editing this book "
                             "or return to main menu."
                           + Style.RESET_ALL)
 
                 elif user_choice == "3":
                     category = validate_string(
-                        Fore.LIGHTCYAN_EX 
+                        Fore.LIGHTCYAN_EX
                         + "Please update books category:"
                         + Style.RESET_ALL, CAT_MAX_LEN, "category")
                     book_no_desc[3] = category.capitalize()
@@ -576,6 +577,7 @@ def edit_book():
                                   "to main menu."
                                   + Style.RESET_ALL)
                             break
+
                         elif select_status == "2":
                             status = READ_NO
                             book_no_desc[4] = status
@@ -619,6 +621,7 @@ def print_all_database():
      Gets all values from the database and prints them
      to the terminal in a form of table generated with
      PrettyTable library.
+     https://pypi.org/project/prettytable/
     """
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
@@ -750,7 +753,7 @@ def show_all_books():
     if database_check():
         pass
     else:
-        print(VIEW_ALL_BOOKS)
+        print(SHOW_ALL_BOOKS)
         print(LINE)
         print_all_database()
         print(LINE)

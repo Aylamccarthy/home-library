@@ -1,13 +1,13 @@
 <h1 align = "center">Home Library App- Python Project </h1>
 
-### Developer: Ayla McCarthy
+### Student Developer: Ayla McCarthy
 
-<b>[View live program here]() </b>  :computer:
+<b>[View live program here]() </b>  
 
 
 ![Program mockup]
 
-The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal/family book libraries, view, add, edit, and remove books.
+The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal/family book libraries, view, add, update, and remove books.
 
 Project purpose was to build a command-line python application that allows user to manage a common dataset about a particular domain.
 
@@ -17,7 +17,7 @@ Project purpose was to build a command-line python application that allows user 
 # Project
 ## Strategy/Scope
 
-I chose to develop an application that can be used in real life. Home Library App allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, editing and removing books.
+I chose to develop an application that can be used in real life. This idea came to mind when I was brainstorming on what app to develop to help my life as a parent taking care of a young family. Initially I thought about a weekly grocery shopping list app, but when I saw our books all over the house, that's when I decided, an app to manage these books would be perfect! Home Library App was designed to allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, updating and removing books.
 
 The application should have a clean and intuitive user interface and offer easy access and navigation to all functionalities.
 
@@ -74,4 +74,5 @@ Python Google Sheets API Tutorial - 2019 |Tech With Tim
 Python Full Course for free | Bro Code
 How to create ASCII art text in Python | Coding Professor
 StackOverflow
+W3Schools
 
