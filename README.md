@@ -57,6 +57,8 @@ The book IDs in the database would not generate automatically as expected.
 
 Validation on edit_book function is not working as expected
 
+backround image and favicon are not working as expected
+
 
 
 
