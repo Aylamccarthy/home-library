@@ -641,7 +641,30 @@ def search_book():
     and the book is indeed in the database, it will be printed out in the
     terminal.
     """
-
+    while True:
+        # user inputs title, then it's being validated, max 24 char allowed
+        if title = validate_string(Fore.LIGHTCYAN_EX
+                                + "Please enter book's title: "
+                                + Style.RESET_ALL, TITLE_MAX_LEN,
+                                "title")
+        # user inputs author then it's being validated, max 16 char allowed
+        elif author = validate_string(Fore.LIGHTCYAN_EX
+                                 + "Please enter author name: "
+                                 + Style.RESET_ALL, AUTHOR_MAX_LEN,
+                                 "author")
+                                 break
+        else:
+            print("Invalid input. Must ba at least 3 characters. Please try again.")
+    # search for books that matches query
+    results = SHEET.findall(query)
+    # print results
+    if len(results) == 0:
+        print("No books found.")
+    else:
+        print(f"{len(results)} book(s) found:")
+        for result in results:
+            print(f"{result.value} at row {result.row}, column {result.col}")
+        
 
 
 def remove_book():
