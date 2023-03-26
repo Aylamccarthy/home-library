@@ -73,8 +73,13 @@ SHOW_ALL_BOOKS = Fore.WHITE \
                  + Style.RESET_ALL
 
 SHOW_BOOK_DETAILS = Fore.WHITE \
-                    + "This is detailed view of the book entry." \
+                    + "This is detailed summary of the book entry." \
                     + Style.RESET_ALL
+
+SEARCH_BOOK = Fore.WHITE \
+              + "Here you can search a book  by entering a book title" \
+                "or author name" + Style.RESET_ALL
+
 END_SCREEN = Fore.WHITE + """
 This App was developed by Ayla McCarthy as Project Portfolio 3
 for Diploma in Full Stack Software Development
@@ -113,7 +118,8 @@ def menu():
     3. Remove book
     4. View all books
     5. Show book details
-    6. Exit
+    6. Search book
+    7. Exit
     """ + Style.RESET_ALL)
 
 
@@ -143,6 +149,8 @@ def show_menu():
         elif user_option == "5":
             view_book_details()
         elif user_option == "6":
+            search_book()
+        elif user_option == "7":
             exit_app()
             break
 
@@ -634,6 +642,7 @@ def print_all_database():
     # Print the table
     print(table)
 
+
 def search_book():
     """
     This will allow the user to search for a particular book using book 
@@ -642,30 +651,44 @@ def search_book():
     terminal.
     """
     while True:
-        # user inputs title, then it's being validated, max 24 char allowed
-        if title = validate_string(Fore.LIGHTCYAN_EX
-                                + "Please enter book's title: "
-                                + Style.RESET_ALL, TITLE_MAX_LEN,
-                                "title")
-        # user inputs author then it's being validated, max 16 char allowed
-        elif author = validate_string(Fore.LIGHTCYAN_EX
-                                 + "Please enter author name: "
-                                 + Style.RESET_ALL, AUTHOR_MAX_LEN,
-                                 "author")
-                                 break
+        user_choice = input(Fore.LIGHTYELLOW_EX
+                            + "If you wish to search by book title, press 1:\n"
+                             "If you wish to search by book author, press 2: "
+                            + Style.RESET_ALL)
+        try:
+            validate_num_range(user_choice, 1, 2)
+        except ValueError:
+            continue
+
+        if user_choice == "1":
+            title = validate_string(Fore.LIGHTCYAN_EX
+                                    + "Please enter book's title: "
+                                    + Style.RESET_ALL,
+                                    TITLE_MAX_LEN, "Title")
+            # search for books that match the title
+            results = SHEET.findall(title)
+            break
+        elif user_choice == "2":
+            author = validate_string(Fore.LIGHTCYAN_EX
+                                     + "Please enter author's name: "
+                                     + Style.RESET_ALL, 
+                                     AUTHOR_MAX_LEN, "Author")
+            # search for books that match the author
+            results = SHEET.findall(author)
+            break
         else:
-            print("Invalid input. Must ba at least 3 characters. Please try again.")
-    # search for books that matches query
-    results = SHEET.findall(query)
+            print("Invalid input.")
+            
     # print results
     if len(results) == 0:
-        print("No books found.")
+        print(Fore.LIGHTRED_EX 
+              +"No books found."
+              + Style.RESET_ALL)
     else:
         print(f"{len(results)} book(s) found:")
         for result in results:
             print(f"{result.value} at row {result.row}, column {result.col}")
         
-
 
 def remove_book():
     """
