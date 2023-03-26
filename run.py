@@ -828,7 +828,42 @@ def view_book_details():
     # Print a list of all book IDs for the user to choose from
     print("Select a book ID to display details:")
     print_all_database()
+
+    # Prompts the user to enter a book ID then validate the input
+    while True:
+        try: 
+            book_id = int(input("Enter a book ID: "))
+            if book_id < 1 or book_id > len(data):
+                raise ValueError()
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid book ID.")
     
+    # extract the book information from the database
+    book = data[int(book_id)-1]
+    book_title = book[0]
+    book_author = book[1]
+    book_category = book[2]
+    book_status = book[3]
+    book_description = book[4]
+
+    # create a prettyTable object and add the book information as a row
+    table = prettyTable.PrettyTable()
+    table.field_names = ["ID", "Title", "Author", "Category", "Status"]
+    table.add_row([book_id, book_title, book_author, book_category, book_status])
+
+    # Set column alignments and max column widths for better readability
+    table.align["ID"] = "r"
+    table.align["Title"] = "l"
+    table.align["Author"] = "l"
+    table.align["Category"] = "l"
+    table.align["Status"] = "l"
+    table._max_width = 30
+
+    # print the table and the book description
+    print(table)
+    print("Description")
+    print(book_description)
 
 
 def exit_app():
