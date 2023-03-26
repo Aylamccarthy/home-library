@@ -634,6 +634,15 @@ def print_all_database():
     # Print the table
     print(table)
 
+def search_book():
+    """
+    This will allow the user to search for a particular book using book 
+    title or author. The user's input is validated and if it is a valid input
+    and the book is indeed in the database, it will be printed out in the
+    terminal.
+    """
+
+
 
 def remove_book():
     """
