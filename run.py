@@ -817,32 +817,18 @@ def show_all_books():
 
 def view_book_details():
     """
-    Allows user to select a book and view its particular details.
-    It checks first if the database is empty,if it's not, calls
-    the show_all_books() function to display all books in the
-    database. Then creates a list of possible inputs and enters
-    a while loop that keeps asking the user which book they wish
-    to see details for. If the user input is valid, book details 
-    from the database will be displayed using prettyTable.
-    If the user input is invalid it will keep running until a
-    valid input is provided.
+    Prompts the user to select a book ID, then displays the detailed 
+    information about the selected book as a table using PrettyTable.
     """
-    if database_check():
-        pass
-    else:
-        show_all_books()
-        allowed_input = SHEET.col_values(1)[1:]
+    # check if the database is empty
+    if len(data) == 0:
 
-        while True:
-            user_choice = input(Fore.LIGHTCYAN_EX
-                                + "Which book would you like to view?"
-                                + Style.RESET_ALL)
-
-            if user_choice in allowed_input:
-                db_row = int(user_choice) + 1
-                book_id = SHEET.row_values(db_row)
-                book_to_view = book_id[:-1]
-                book_description = str(book_id[-1])
+        print("There are no books in the database.")
+        return
+    # Print a list of all book IDs for the user to choose from
+    print("Select a book ID to display details:")
+    print_all_database()
+    
 
 
 def exit_app():
