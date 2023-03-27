@@ -460,6 +460,7 @@ def update_book():
             show_all_books()
             user_choice = input(Fore.LIGHTYELLOW_EX
                                 + "\nWhich book would you like to edit?: "
+                                  "Please enter book ID number"
                                 + Style.RESET_ALL)
             clear_terminal()
 
@@ -628,16 +629,16 @@ def print_all_database():
     """
      Gets all values from the database and prints them
      to the terminal in a form of table generated with
-     PrettyTable library.
+     PrettyTable library, excluding the description column.
      https://pypi.org/project/prettytable/
     """
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
-    table.field_names = data[0]
+    table.field_names = data[0][:-1] # excludes the last(description) column
 
     # Insert the data into the table
     for row in data[1:]:
-        table.add_row(row)
+        table.add_row(row[:-1])
 
     # Print the table
     print(table)
@@ -682,7 +683,7 @@ def search_book():
     # print results
     if len(results) == 0:
         print(Fore.LIGHTRED_EX 
-              +"No books found."
+              + "No books found."
               + Style.RESET_ALL)
     else:
         print(f"{len(results)} book(s) found:")
@@ -848,9 +849,10 @@ def view_book_details():
     book_description = book[4]
 
     # create a prettyTable object and add the book information as a row
-    table = prettyTable.PrettyTable()
+    table = PrettyTable()
     table.field_names = ["ID", "Title", "Author", "Category", "Status"]
-    table.add_row([book_id, book_title, book_author, book_category, book_status])
+    table.add_row([book_id, book_title, book_author, book_category, 
+                  book_status])
 
     # Set column alignments and max column widths for better readability
     table.align["ID"] = "r"
@@ -858,7 +860,7 @@ def view_book_details():
     table.align["Author"] = "l"
     table.align["Category"] = "l"
     table.align["Status"] = "l"
-    table._max_width = 30
+    table._max_width = 79
 
     # print the table and the book description
     print(table)
