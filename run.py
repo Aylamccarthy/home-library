@@ -396,8 +396,9 @@ def add_book():
                               + Style.RESET_ALL, DESC_MAX_LEN,
                                 "description")
 
+        # prints the current date to the terminal
         date = datetime.datetime.now()
-        date.strftime("%y-%m-%d")
+        print(date.strftime("%y-%m-%d"))
 
         break
 
@@ -846,14 +847,17 @@ def view_book_details():
               + Style.RESET_ALL)
         return
     # Print a list of all book IDs for the user to choose from
-    print(Fore.GREEN + "Select a book ID to display details:"
+    print(Fore.LIGHTGREEN_EX
+          + "Select a book ID to display details:"
           + Style.RESET_ALL)
     print_all_database()
 
     # Prompts the user to enter a book ID then validate the input
     while True:
         try:
-            book_id = int(input("Enter a book ID: "))
+            book_id = int(input(Fore.LIGHTGREEN_EX 
+                          + "Enter a book ID: "
+                          + Style.RESET_ALL))
             if book_id < 1 or book_id > len(data):
                 raise ValueError()
             break
@@ -861,7 +865,7 @@ def view_book_details():
             print("Invalid input. Please enter a valid book ID.")
     
     # extract the book information from the database
-    book = data[int(book_id)-1]
+    book = data[book_id-1]
     book_title = book[0]
     book_author = book[1]
     book_category = book[2]
@@ -880,11 +884,15 @@ def view_book_details():
     table.align["Author"] = "l"
     table.align["Category"] = "l"
     table.align["Status"] = "l"
-    table._max_width = 79
+    table._max_width = {"ID": 2, "Title": 24, "Author": 18, 
+                        "Category": 11, "Status": 8}
 
     # print the table and the book description
+    print(Fore.LIGHTGREEN_EX 
+          + "Here is the detailed information"
+           "of book your book." 
+          + Style.RESET_ALL)
     print(table)
-    print("Description")
     print(book_description)
 
 
