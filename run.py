@@ -120,7 +120,8 @@ def menu():
     4. View all books
     5. Show book details
     6. Search book
-    7. Exit
+    7. Move book
+    8. Exit
     """ + Style.RESET_ALL)
 
 
@@ -132,13 +133,13 @@ def show_menu():
     while True:
         menu()  # prints menu
         user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 7 "
+                            + "Please select a number from 1 to 8 "
                               "to continue:\n "
                             + Style.RESET_ALL)
 
         clear_terminal()
         # validates user input, only values from 1 to 6 are allowed
-        validate_num_range(user_option, 1, 7)
+        validate_num_range(user_option, 1, 8)
         if user_option == "1":
             add_book()
         elif user_option == "2":
@@ -152,6 +153,8 @@ def show_menu():
         elif user_option == "6":
             search_book()
         elif user_option == "7":
+            move_book()
+        elif user_option == "8":
             exit_app()
             break
 
@@ -830,13 +833,24 @@ def move_book():
     before moving, the input is then validated. Book is moved if 
     positive answer is given.
     """
-    source_sheet = SHEET
-    reading_list = GSPREAD_CLIENT.open('home_library').sheet2
-    donations_list = GSPREAD_CLIENT.open('home_library').sheet3
-    favorites = GSPREAD_CLIENT.open('home_library').sheet4
-    destination_sheet1 = get_destination_sheet(reading_list)
-    destination_sheet2 = get_destination_sheet(donations_list)
-    destination_sheet3 = get_destination_sheet(favorites)
+    book_name =  input("Please enter title of the book you wish to move:\n ")
+    source_sheet_name = input("Enter the name of the worksheet: ")
+    destination_sheet = input("Where would you like to move it?" )
+
+    # open the source and destination worksheets
+    source_worksheet = GSPREAD_CLIENT.open("library").worksheet(book_name)
+    destination_worksheet = GSPREAD_CLIENT.open("reading_list").worksheet(book_name)
+
+    # get the book data from the source worksheet
+    book_data = source_worksheet.get_all_values
+
+    # add the book data to the destination worksheet and delete it 
+    # from the source worksheet
+    destination_worksheet.clear()
+    destination_worksheet.update(book_data)
+
+    print("The book has now been moved")
+
 
 
 def show_all_books():
