@@ -35,7 +35,7 @@ READ_YES = "Read"
 READ_NO = "Not read"
 
 # PrettyTable columns width
-MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 12, "Status": 8}
+MAX_LEN = {"ID": 2, "Title": 24, "Author": 18, "Category": 11, "Status": 8}
 # PrettyTable table width
 TABLE_MAX_LEN = 79
 # Book details max length for validation of inputs
@@ -246,6 +246,17 @@ def how_many_books():
     return FIRST_BOOK_ID, LAST_BOOK_ID
 
 
+def add_date():
+    """
+    This function will add the current date to the database
+    everytime a user make any change to the database. 
+    e.g. when a book is added or updated.
+    https://www.w3schools.com/python/python_datetime.asp
+    """
+    now = datetime.datetime.now()
+    SHEET.append_row(now)
+
+
 def database_check():
     """
     Checks if database is not empty.
@@ -385,11 +396,13 @@ def add_book():
                               + Style.RESET_ALL, DESC_MAX_LEN,
                                 "description")
 
+        date = datetime.datetime.now()
+        date.strftime("%y-%m-%d")
+
         break
 
     # insert all collected inputs into the list
-    book_to_be_added.extend([title, author, category, status,
-                             description])
+    book_to_be_added.extend([title, author, category, status, description])
     clear_terminal()
     print(Fore.LIGHTCYAN_EX 
           + "Here's the details of your new book:"
@@ -420,7 +433,8 @@ def add_book():
 
     while True:
         are_you_sure = input(Fore.LIGHTYELLOW_EX
-                             + " \nConfirm adding this book. Y/N: "
+                             + " \nAre you sure you want" 
+                             " to add this book. Y/N: "
                              + Style.RESET_ALL)
         if validate_yes_no(are_you_sure):
 
