@@ -477,8 +477,8 @@ def update_book():
             print(UPDATE_BOOK)
             show_all_books()
             user_choice = input(Fore.LIGHTYELLOW_EX
-                                + "\nWhich book would you like to edit?: "
-                                  "Please enter book ID number"
+                                + "\nWhich book would you like to edit? "
+                                  "\nPlease enter book ID number: "
                                 + Style.RESET_ALL)
             clear_terminal()
 
@@ -494,6 +494,7 @@ def update_book():
                 print(UPDATE_BOOK)
                 print(LINE)
                 x = PrettyTable()  # https://pypi.org/project/prettytable/
+
                 # assigns table's headers from first row in database
                 x.field_names = HEADERS_NO_DESC
                 x._max_table_width = TABLE_MAX_LEN
@@ -672,7 +673,7 @@ def search_book():
     while True:
         user_choice = input(Fore.LIGHTYELLOW_EX
                             + "If you wish to search by book title, press 1:\n"
-                             "If you wish to search by book author, press 2: "
+                            "If you wish to search by book author, press 2: "
                             + Style.RESET_ALL)
         try:
             validate_num_range(user_choice, 1, 2)
@@ -819,6 +820,25 @@ def remove_book():
             break
 
 
+def move_book():
+    """
+    This will allow the user to move a selected book to another 
+    google sheet e.g. books for donation list or reading list.
+    Loop is asked user to select book to be moved. The input is
+    then validated. In case of wrong input, user will be asked
+    again until valid input is given. User is asked to confirm
+    before moving, the input is then validated. Book is moved if 
+    positive answer is given.
+    """
+    source_sheet = SHEET
+    reading_list = GSPREAD_CLIENT.open('home_library').sheet2
+    donations_list = GSPREAD_CLIENT.open('home_library').sheet3
+    favorites = GSPREAD_CLIENT.open('home_library').sheet4
+    destination_sheet1 = get_destination_sheet(reading_list)
+    destination_sheet2 = get_destination_sheet(donations_list)
+    destination_sheet3 = get_destination_sheet(favorites)
+
+
 def show_all_books():
     """
      Checks first if the database is not empty.
@@ -839,61 +859,55 @@ def view_book_details():
     Prompts the user to select a book ID, then displays the detailed 
     information about the selected book as a table using PrettyTable.
     """
-    # check if the database is empty
-    if len(data) == 0:
-
-        print(Fore.LIGHTRED_EX
-              + "There are no books in the database."
-              + Style.RESET_ALL)
-        return
-    # Print a list of all book IDs for the user to choose from
-    print(Fore.LIGHTGREEN_EX
-          + "Select a book ID to display details:"
-          + Style.RESET_ALL)
-    print_all_database()
-
-    # Prompts the user to enter a book ID then validate the input
-    while True:
-        try:
-            book_id = int(input(Fore.LIGHTGREEN_EX 
-                          + "Enter a book ID: "
-                          + Style.RESET_ALL))
-            if book_id < 1 or book_id > len(data):
-                raise ValueError()
-            break
-        except ValueError:
-            print("Invalid input. Please enter a valid book ID.")
     
-    # extract the book information from the database
-    book = data[book_id-1]
-    book_title = book[0]
-    book_author = book[1]
-    book_category = book[2]
-    book_status = book[3]
-    book_description = book[4]
+    if not database_check():  # check if the database is empty
+        show_all_books()
+        allowed_input = SHEET.col_values(1)[1:]
+        while True:
+            user_choice = input(Fore.LIGHTGREEN_EX 
+                                + "\nWhich book detail would you like to see?"
+                                + Style.RESET_ALL)
+            if user_choice in allowed_input:
+                db_row = int(user_choice) + 1
+                book_id = SHEET.row_values(db_row)
+                book_to_display = book_id[:-1]  # find last row in the database
+                book_description = str(book_id[-1])
 
-    # create a prettyTable object and add the book information as a row
-    table = PrettyTable()
-    table.field_names = ["ID", "Title", "Author", "Category", "Status"]
-    table.add_row([book_id, book_title, book_author, book_category, 
-                  book_status])
+                x = PrettyTable()
+                x.field_names = HEADERS_NO_DESC
+                # Maximum width of the whole table is set to 79 characters.
+                # Each column's maximum width is assigned individually.
+                x._max_table_width = TABLE_MAX_LEN
+                x._max_width = MAX_LEN
+                x.add_rows([book_to_display])
+                x.align["ID"] = "r"  # aligns column to the right
+                x.align["Title"] = "l"  # aligns column to the left
+                x.align["Author"] = "l"
+                x.align["Category"] = "l"
+                x.align["Status"] = "l"
+                clear_terminal()
+                print(SHOW_BOOK_DETAILS)
+                print(LINE)
+                print(x)
+                print(DESCRIPTION)
+                wrap_text(book_description)
+                print(LINE)
+                break
+            else:
+                clear_terminal()
+                if how_many_books():
+                    print(Fore.LIGHTRED_EX
+                          + "Wrong input. You only have one book"
+                            "\nPease select it."
+                          + Style.RESET_ALL)
 
-    # Set column alignments and max column widths for better readability
-    table.align["ID"] = "r"
-    table.align["Title"] = "l"
-    table.align["Author"] = "l"
-    table.align["Category"] = "l"
-    table.align["Status"] = "l"
-    table._max_width = {"ID": 2, "Title": 24, "Author": 18, 
-                        "Category": 11, "Status": 8}
+                else:
+                    print(Fore.LIGHTRED_EX
+                          + f"Wrong input. \nPlease select ID from 1"
+                            f"\nto {LAST_BOOK_ID}.\n"
+                          + Style.RESET_ALL)
 
-    # print the table and the book description
-    print(Fore.LIGHTGREEN_EX 
-          + "Here is the detailed information"
-           "of book your book." 
-          + Style.RESET_ALL)
-    print(table)
-    print(book_description)
+        return
 
 
 def exit_app():
