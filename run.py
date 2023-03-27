@@ -4,6 +4,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from colorama import Fore, Style
+import datetime
 from art import *
 
 
@@ -60,23 +61,23 @@ You will be asked to enter book title, author, category and status.
 Choose if you have read the book or not. Book ID is generated automatically.
 """ + Style.RESET_ALL
 
-UPDATE_BOOK = Fore.WHITE \
+UPDATE_BOOK = Fore.GREEN \
             + "You can update all book details below." \
             + Style.RESET_ALL
 
-REMOVE_BOOK = Fore.WHITE \
+REMOVE_BOOK = Fore.GREEN \
               + "Here you can remove selected book from the database." \
               + Style.RESET_ALL
 
-SHOW_ALL_BOOKS = Fore.WHITE \
-                 + "This is the list of all your books." \
+SHOW_ALL_BOOKS = Fore.GREEN\
+                 + "\nThis is the list of all your books." \
                  + Style.RESET_ALL
 
-SHOW_BOOK_DETAILS = Fore.WHITE \
+SHOW_BOOK_DETAILS = Fore.GREEN \
                     + "This is detailed summary of the book entry." \
                     + Style.RESET_ALL
 
-SEARCH_BOOK = Fore.WHITE \
+SEARCH_BOOK = Fore.GREEN \
               + "Here you can search a book  by entering a book title" \
                 "or author name" + Style.RESET_ALL
 
@@ -131,13 +132,13 @@ def show_menu():
     while True:
         menu()  # prints menu
         user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 6 "
+                            + "Please select a number from 1 to 7 "
                               "to continue:\n "
                             + Style.RESET_ALL)
 
         clear_terminal()
         # validates user input, only values from 1 to 6 are allowed
-        validate_num_range(user_option, 1, 6)
+        validate_num_range(user_option, 1, 7)
         if user_option == "1":
             add_book()
         elif user_option == "2":
@@ -223,7 +224,7 @@ def renumber_id_column():
 
 def how_many_books():
     """
-    Checks if there is one more books in the database.
+    Checks if there is one or more books in the database.
     This will be used later in edit_book, remove_book,
     and show_book_detais functions to conditionally give
     user hint on possible input selection, e.g. "Choose the
@@ -390,7 +391,9 @@ def add_book():
     book_to_be_added.extend([title, author, category, status,
                              description])
     clear_terminal()
-    print("Here's the details of your new book:")
+    print(Fore.LIGHTCYAN_EX 
+          + "Here's the details of your new book:"
+          + Style.RESET_ALL)
     first_empty_row = len(SHEET.get_all_values())
     book_to_be_added.insert(0, first_empty_row)
     print(LINE)
@@ -824,15 +827,18 @@ def view_book_details():
     # check if the database is empty
     if len(data) == 0:
 
-        print("There are no books in the database.")
+        print(Fore.LIGHTRED_EX
+              + "There are no books in the database."
+              + Style.RESET_ALL)
         return
     # Print a list of all book IDs for the user to choose from
-    print("Select a book ID to display details:")
+    print(Fore.GREEN + "Select a book ID to display details:"
+          + Style.RESET_ALL)
     print_all_database()
 
     # Prompts the user to enter a book ID then validate the input
     while True:
-        try: 
+        try:
             book_id = int(input("Enter a book ID: "))
             if book_id < 1 or book_id > len(data):
                 raise ValueError()
