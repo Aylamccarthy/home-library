@@ -6,8 +6,6 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from colorama import Fore, Style
 
-
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -125,8 +123,7 @@ def menu():
     4. View all books
     5. Show book details
     6. Search book
-    7. Move book
-    8. Exit
+    7. Exit
     """ + Style.RESET_ALL)
 
 
@@ -139,13 +136,13 @@ def show_menu():
     while True:
         menu()  # prints menu
         user_option = input(Fore.LIGHTGREEN_EX
-                            + "Please select a number from 1 to 8 "
+                            + "Please select a number from 1 to 7 "
                               "to continue:\n "
                             + Style.RESET_ALL)
 
         clear_terminal()
         # validates user input, only values from 1 to 6 are allowed
-        validate_num_range(user_option, 1, 8)
+        validate_num_range(user_option, 1, 7)
         if user_option == "1":
             add_book()
         elif user_option == "2":
@@ -159,8 +156,6 @@ def show_menu():
         elif user_option == "6":
             search_book()
         elif user_option == "7":
-            move_book()
-        elif user_option == "8":
             exit_app()
             break
 
@@ -703,9 +698,7 @@ def search_book():
             # search for books that match the author
             results = SHEET.findall(author)
             break
-        else:
-            print("Invalid input.")
-    
+        
     #  print results
     if len(results) == 0:
         print(Fore.LIGHTRED_EX
@@ -824,48 +817,6 @@ def remove_book():
                 remove_book()
 
             break
-
-
-def move_book():
-    """
-    This will allow the user to move a selected book to another
-    google sheet e.g. books for donation list or reading list.
-    Loop is asked user to select book to be moved. The input is
-    then validated. In case of wrong input, user will be asked
-    again until valid input is given. User is asked to confirm
-    before moving, the input is then validated. Book is moved if
-    positive answer is given.
-    """
-    book_name =  input("Please enter title of the book you wish to move:\n ")
-    destination_sheet = input("Where would you like to move it?"
-    "\nReading list: Please press 1 : " 
-    "\nFavorites: Please press 2: "
-    "\nBooks for Donation list: Please press 3:")
-
-    if destination_sheet == "1":
-        destination_worksheet = GSPREAD_CLIENT.open('reading-list').sheet1
-    elif destination_sheet == "2":
-        destination_worksheet = GSPREAD_CLIENT.open('favourites').sheet1
-    elif destination_sheet == "3":
-        destination_worksheet = GSPREAD_CLIENT.open('donations_list').sheet1
-    else:
-        print("Invalid input")
-        return False
-
-
-    # open the source and destination worksheets
-    source_worksheet = GSPREAD_CLIENT.open("library").worksheet(book_name)
-    destination_worksheet = GSPREAD_CLIENT.open("reading_list").worksheet(book_name)
-
-    # get the book data from the source worksheet
-    book_data = source_worksheet.get_all_values
-
-    # add the book data to the destination worksheet and delete it 
-    # from the source worksheet
-    destination_worksheet.clear()
-    destination_worksheet.update(book_data)
-
-    
 
 
 def show_all_books():
