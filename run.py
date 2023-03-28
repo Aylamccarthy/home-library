@@ -5,7 +5,6 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from colorama import Fore, Style
 import datetime
-from art import *
 
 
 SCOPE = [
@@ -23,6 +22,7 @@ SHEET = GSPREAD_CLIENT.open('home_library').sheet1
 data = SHEET.get_all_values()
 
 # App constants to be used throughout the App
+
 HEADERS = SHEET.row_values(1)
 HEADERS_NO_DESC = HEADERS[:-1]
 HEADERS_NO_DESC_NO_ID = HEADERS[:-1]
@@ -81,6 +81,10 @@ SEARCH_BOOK = Fore.GREEN \
               + "Here you can search a book  by entering a book title" \
                 "or author name" + Style.RESET_ALL
 
+MOVE_BOOK = Fore.GREEN \
+            + "Here you can move your books from" \
+              "one list to another. E.g. Reading list Books for Donation list" + Style.RESET_ALL
+
 END_SCREEN = Fore.WHITE + """
 This App was developed by Ayla McCarthy as Project Portfolio 3
 for Diploma in Full Stack Software Development
@@ -129,6 +133,7 @@ def show_menu():
     """
     Will print menu. Which contains the six main functionalities of
     the app. User is given an option between 1-6.
+    https://alexkisiele-homelibrary-9idtjyrhep2.ws-eu92.gitpod.io/
     """
     while True:
         menu()  # prints menu
@@ -252,7 +257,7 @@ def how_many_books():
 def add_date():
     """
     This function will add the current date to the database
-    everytime a user make any change to the database. 
+    everytime a user make any change to the database..
     e.g. when a book is added or updated.
     https://www.w3schools.com/python/python_datetime.asp
     """
@@ -398,17 +403,16 @@ def add_book():
             Fore.LIGHTCYAN_EX + "Please enter book's description: "
                               + Style.RESET_ALL, DESC_MAX_LEN,
                                 "description")
-
-        # prints the current date to the terminal
-        date = datetime.datetime.now()
-        print(date.strftime("%y-%m-%d"))
-
         break
+
+    # prints the current date to the terminal
+    date = datetime.datetime.now()
+    print(date.strftime("%y-%m-%d"))
 
     # insert all collected inputs into the list
     book_to_be_added.extend([title, author, category, status, description])
     clear_terminal()
-    print(Fore.LIGHTCYAN_EX 
+    print(Fore.LIGHTCYAN_EX
           + "Here's the details of your new book:"
           + Style.RESET_ALL)
     first_empty_row = len(SHEET.get_all_values())
@@ -437,7 +441,7 @@ def add_book():
 
     while True:
         are_you_sure = input(Fore.LIGHTYELLOW_EX
-                             + " \nAre you sure you want" 
+                             + " \nAre you sure you want"
                              " to add this book. Y/N: "
                              + Style.RESET_ALL)
         if validate_yes_no(are_you_sure):
@@ -445,6 +449,8 @@ def add_book():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 SHEET.append_row(book_to_be_added)
+                SHEET.get_all_values()
+
                 print(Fore.LIGHTYELLOW_EX
                       + "\nAdding book to the database..."
                       + "\nUpdating database. Please wait..."
@@ -462,8 +468,8 @@ def add_book():
 def update_book():
     """
     The function first checks if the database exists and is populated.
-    If it does not, the function exits.If the database exists and is populated, 
-    the function displays all books in the database, and prompts the user to 
+    If it does not, the function exits.If the database exists and is populated,
+    the function displays all books in the database, and prompts the user to
     select a book to edit. The user is then presented with the details of
     the selected book in the form of a table, and is prompted to select
     which detail they would like to edit.The function then validates the user's
@@ -640,7 +646,7 @@ def update_book():
                     print(Fore.LIGHTYELLOW_EX
                           + "Keep editing this book or return."
                           + Style.RESET_ALL)
-                          
+
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
                     show_all_books()
@@ -668,7 +674,7 @@ def print_all_database():
 
 def search_book():
     """
-    This will allow the user to search for a particular book using book 
+    This will allow the user to search for a particular book using book
     title or author. The user's input is validated and if it is a valid input
     and the book is indeed in the database, it will be printed out in the
     terminal.
@@ -694,15 +700,15 @@ def search_book():
         elif user_choice == "2":
             author = validate_string(Fore.LIGHTCYAN_EX
                                      + "Please enter author's name: "
-                                     + Style.RESET_ALL, 
+                                     + Style.RESET_ALL,
                                      AUTHOR_MAX_LEN, "Author")
             # search for books that match the author
             results = SHEET.findall(author)
             break
         else:
             print("Invalid input.")
-            
-    # print results
+    
+    #  print results
     if len(results) == 0:
         print(Fore.LIGHTRED_EX 
               + "No books found."
@@ -711,7 +717,7 @@ def search_book():
         print(f"{len(results)} book(s) found:")
         for result in results:
             print(f"{result.value} at row {result.row}, column {result.col}")
-        
+
 
 def remove_book():
     """
@@ -795,7 +801,6 @@ def remove_book():
                                   + "Aborting... Database hasn't been changed."
                                   + Style.RESET_ALL)
                             break
-                                                 
                     else:
                         clear_terminal()
                         print(Fore.LIGHTRED_EX
@@ -825,17 +830,19 @@ def remove_book():
 
 def move_book():
     """
-    This will allow the user to move a selected book to another 
+    This will allow the user to move a selected book to another
     google sheet e.g. books for donation list or reading list.
     Loop is asked user to select book to be moved. The input is
     then validated. In case of wrong input, user will be asked
     again until valid input is given. User is asked to confirm
-    before moving, the input is then validated. Book is moved if 
+    before moving, the input is then validated. Book is moved if
     positive answer is given.
     """
     book_name =  input("Please enter title of the book you wish to move:\n ")
-    source_sheet_name = input("Enter the name of the worksheet: ")
-    destination_sheet = input("Where would you like to move it?" )
+    destination_sheet = input("Where would you like to move it?"
+    "\nReading list: Please press 1 : " 
+    "\nFavorites: Please press 2: "
+    "\nBooks for Donation list: Please press 3:")
 
     # open the source and destination worksheets
     source_worksheet = GSPREAD_CLIENT.open("library").worksheet(book_name)
@@ -850,7 +857,6 @@ def move_book():
     destination_worksheet.update(book_data)
 
     print("The book has now been moved")
-
 
 
 def show_all_books():
@@ -870,15 +876,15 @@ def show_all_books():
 
 def view_book_details():
     """
-    Prompts the user to select a book ID, then displays the detailed 
+    Prompts the user to select a book ID, then displays the detailed
     information about the selected book as a table using PrettyTable.
     """
-    
+
     if not database_check():  # check if the database is empty
         show_all_books()
         allowed_input = SHEET.col_values(1)[1:]
         while True:
-            user_choice = input(Fore.LIGHTGREEN_EX 
+            user_choice = input(Fore.LIGHTGREEN_EX
                                 + "\nWhich book detail would you like to see?"
                                 + Style.RESET_ALL)
             if user_choice in allowed_input:
