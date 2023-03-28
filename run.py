@@ -1,10 +1,11 @@
 import os
 import textwrap
+import datetime
 import gspread
 from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 from colorama import Fore, Style
-import datetime
+
 
 
 SCOPE = [
@@ -47,7 +48,7 @@ CAT_MAX_LEN = MAX_LEN["Category"]
 # outside the PrettyTable tab.
 DESC_MAX_LEN = 200
 # Separator line
-LINE = Fore.YELLOW + "#"*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
+LINE = Fore.YELLOW + "="*TABLE_MAX_LEN + Style.RESET_ALL  # 79 characters long
 
 # Initialize two values to store id's of first and last book.
 # They are used later to determine valid input range and DB length.
@@ -405,10 +406,6 @@ def add_book():
                                 "description")
         break
 
-    # prints the current date to the terminal
-    date = datetime.datetime.now()
-    print(date)
-
     # insert all collected inputs into the list
     book_to_be_added.extend([title, author, category, status, description])
     clear_terminal()
@@ -531,14 +528,14 @@ def update_book():
                 6. Return
                 """ + Style.RESET_ALL)
                 user_choice = input(Fore.LIGHTYELLOW_EX
-                                    + "What do you want to edit? "
+                                    + "What do you want to edit?\n "
                                       "Select 1-6: "
                                     + Style.RESET_ALL)
                 validate_num_range(user_choice, 1, 6)
 
                 if user_choice == "1":
                     title = validate_string(Fore.LIGHTCYAN_EX
-                                            + "Please update book's title: "
+                                            + "Please update book's title:\n "
                                             + Style.RESET_ALL,
                                               TITLE_MAX_LEN, "Title")
                     book_no_desc[1] = title.title()
@@ -557,7 +554,7 @@ def update_book():
 
                 elif user_choice == "2":
                     author = validate_string(Fore.LIGHTCYAN_EX
-                                             + "Please update book's author"
+                                             + "Please update book's author:\n"
                                              + Style.RESET_ALL, TITLE_MAX_LEN,
                                              "author")
                     book_no_desc[2] = author.title()
@@ -576,7 +573,7 @@ def update_book():
                 elif user_choice == "3":
                     category = validate_string(
                         Fore.LIGHTCYAN_EX
-                        + "Please update books category:"
+                        + "Please update books category:\n"
                         + Style.RESET_ALL, CAT_MAX_LEN, "category")
                     book_no_desc[3] = category.capitalize()
                     SHEET.update_cell(db_row, 4, category.capitalize())
@@ -634,7 +631,7 @@ def update_book():
                     description = \
                             validate_string(Fore.LIGHTCYAN_EX
                                             + "Please update book's"
-                                              "description:"
+                                              "description:\n"
                                             + Style.RESET_ALL, DESC_MAX_LEN,
                                             "description")
                     SHEET.update_cell(db_row, 6, description.capitalize())
@@ -663,7 +660,7 @@ def print_all_database():
     """
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
-    table.field_names = data[0][:-1] # excludes the last(description) column
+    table.field_names = data[0][:-1]  # excludes the last(description) column
 
     # Insert the data into the table
     for row in data[1:]:
@@ -711,7 +708,7 @@ def search_book():
     
     #  print results
     if len(results) == 0:
-        print(Fore.LIGHTRED_EX 
+        print(Fore.LIGHTRED_EX
               + "No books found."
               + Style.RESET_ALL)
     else:
@@ -845,6 +842,17 @@ def move_book():
     "\nFavorites: Please press 2: "
     "\nBooks for Donation list: Please press 3:")
 
+    if destination_sheet == "1":
+        destination_worksheet = GSPREAD_CLIENT.open('reading-list').sheet1
+    elif destination_sheet == "2":
+        destination_worksheet = GSPREAD_CLIENT.open('favourites').sheet1
+    elif destination_sheet == "3":
+        destination_worksheet = GSPREAD_CLIENT.open('donations_list').sheet1
+    else:
+        print("Invalid input")
+        return False
+
+
     # open the source and destination worksheets
     source_worksheet = GSPREAD_CLIENT.open("library").worksheet(book_name)
     destination_worksheet = GSPREAD_CLIENT.open("reading_list").worksheet(book_name)
@@ -857,7 +865,7 @@ def move_book():
     destination_worksheet.clear()
     destination_worksheet.update(book_data)
 
-    print("The book has now been moved")
+    
 
 
 def show_all_books():
