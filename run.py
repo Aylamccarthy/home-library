@@ -407,7 +407,7 @@ def add_book():
 
     # prints the current date to the terminal
     date = datetime.datetime.now()
-    print(date.strftime("%y-%m-%d"))
+    print(date)
 
     # insert all collected inputs into the list
     book_to_be_added.extend([title, author, category, status, description])
@@ -649,7 +649,7 @@ def update_book():
 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
-                    show_all_books()
+                    show_menu()
                     break
 
 

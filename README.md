@@ -73,6 +73,7 @@ Python Library Management System Project - Full Tutorial#39 | Programming is Fun
 Python Tutorial for Beginners- Kevin Stratvert | Full Python Course 
 Learn Python in 2023 | TechWorld with Nana
 Python Google Sheets API Tutorial - 2019 |Tech With Tim 
+Colorama Tutorial | Tech with Tim
 Python Full Course for free | Bro Code
 How to create ASCII art text in Python | Coding Professor
 StackOverflow
