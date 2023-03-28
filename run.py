@@ -644,11 +644,12 @@ def update_book():
                           + "Book description updated successfully.\n"
                           + Style.RESET_ALL)
                     print(Fore.LIGHTYELLOW_EX
-                          + "Keep editing this book or return."
+                          + "Keep editing this book or return.\n"
                           + Style.RESET_ALL)
 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
+                    show_all_books()
                     show_menu()
                     break
 
