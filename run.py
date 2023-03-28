@@ -606,7 +606,6 @@ def update_book():
                                   "to main menu."
                                   + Style.RESET_ALL)
                             break
-
                         elif select_status == "2":
                             status = READ_NO
                             book_no_desc[4] = status
