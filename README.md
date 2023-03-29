@@ -184,7 +184,47 @@ Upon successful input validation, a confirmation message is printed wether the s
 
 ### Exit
 
-This feature allows the user to exit the application
+This feature allows the user to exit the application. User input is validated. A thank you message is printed if user decides to exit the app or take him back to main menu otherwise.
+
+![exit_app](../home-library/views/images/exit_app1.png)
+
+#   Technology
+    
+##  Languages used
+
+-   [Python](https://www.python.org/) - high-level, general-purpose programming language.
+-   [Markdown](https://en.wikipedia.org/wiki/Markdown) - markup language used to write README and TESTING documents.
+
+##  Software used
+
+- [Favicon.io](https://www.favicon.io) - tool used to create favicon.
+
+- [Git](https://git-scm.com/) - Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
+
+- [GitHub](https://github.com/) - GitHub is used to store the project's code after being pushed from Git.
+
+- [Google Sheets API](https://developers.google.com/sheets/api) - was used to connect with the database made of the spreadsheet.
+
+- [Heroku](https://heroku.com) - online app used to deploy project.
+
+- [LucidChart](https://www.lucidchart.com/pages) - was used to create flow diagram.
+
+- [Text ASCII Art Generator](http://patorjk.com/software/taag/) - used to create app logo in ASCII format.
+
+
+##  Python libraries/modules
+
+- [gspread](https://docs.gspread.org/) - used for control Google Sheets API by python.
+
+- [OAuthLib](https://pypi.org/project/oauthlib/) - required to manage HTTP request and authenticate to Google Sheets API.
+
+- [PrettyTable](https://pypi.org/project/prettytable/) - python library for easily displaying tabular data in a visually appealing ASCII table format.
+
+- [colorama](https://pypi.org/project/colorama/) - used to color terminal outputs.
+
+- [os](https://docs.python.org/3/library/os.html) - built-in pythod module - used to write clear_terminal function.
+
+- [textwrap](https://docs.python.org/3/library/textwrap.html) - built-in python module - used to wrap lines over 79 char to next line e.g. long book description.
 
 
 

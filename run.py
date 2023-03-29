@@ -117,7 +117,7 @@ def menu():
     Show all the options 1-6 the user can choose from to manage their books
     """
     print(Fore.WHITE + """
-    What would you like to do?
+    What would you like to do?\n
     1. Add book
     2. Update book
     3. Remove book
