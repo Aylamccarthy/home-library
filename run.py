@@ -636,6 +636,7 @@ def update_book():
 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
+                    show_all_books()
                     show_menu()
 
                     break
