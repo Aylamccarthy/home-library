@@ -460,7 +460,7 @@ def update_book():
     the function displays all books in the database, and prompts the user to
     select a book to edit. The user is then presented with the details of
     the selected book in the form of a table, and is prompted to select
-    which detail they would like to edit.The function then validates the user's
+    which detail he would like to edit.The function then validates the user's
     input. If the user enters a valid input, the function updates the database
     and displays a success message. The user is then prompted to either
     keep editing the book or return to the main menu.
@@ -636,8 +636,8 @@ def update_book():
 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
-                    show_all_books()
                     show_menu()
+
                     break
 
 

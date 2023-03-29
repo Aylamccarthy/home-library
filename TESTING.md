@@ -64,7 +64,6 @@ Function used for inputs validation - validate_yes_no().
 |  Wchich book would you like to edit? | "5" (5 records exist )  | Input valid, show book #5  | Pass
 |  What do you want to edit? Select 1-6 | "0", "a", "`", empty (6 possible choices )  | Wrong input | Pass
 |  What do you want to edit? Select 1-6 | "7" (6 possible choices )  | Wrong input | Pass
-|  Please update book's title | "the da vincii code" | Valid input, convert title to "Da Vincii Code, The" | Pass
 
 The same validation method is used for input of author, title, category, status and description for both "add book" and "update book" features.
 
