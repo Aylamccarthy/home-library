@@ -117,6 +117,7 @@ def menu():
     Show all the options 1-6 the user can choose from to manage their books
     """
     print(Fore.WHITE + """
+    What would you like to do?
     1. Add book
     2. Update book
     3. Remove book
@@ -902,7 +903,7 @@ def exit_app():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 print(Fore.LIGHTYELLOW_EX
-                      + f"Thank you for using {APP}!"
+                      + f"Thank you for using {APP} today!"
                       + Style.RESET_ALL)
                 print(END_SCREEN)
                 print(Fore.LIGHTYELLOW_EX + "\nTerminating..."
