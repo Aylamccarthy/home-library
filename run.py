@@ -672,9 +672,10 @@ def search_book():
     and the book is indeed in the database, it will be printed out in the
     terminal.
     """
+    print(SEARCH_BOOK)
     while True:
         user_choice = input(Fore.LIGHTYELLOW_EX
-                            + "If you wish to search by book title, press 1:\n"
+                            + "\nIf you wish to search by book title, press 1:\n"
                             "If you wish to search by book author, press 2: "
                             + Style.RESET_ALL)
         try:

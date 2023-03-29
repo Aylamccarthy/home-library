@@ -139,7 +139,7 @@ When all the user inputs are successfully validated, the user will be asked if h
 
 ### Update Book
 
-This feature allows user to edit every book's detail. The input is validated. There is also a "return" option which will bring the user back to main menu. This function works similarly as the book function. The user will also be ask to confirm before proceeding to update. 
+This feature allows user to edit every book's detail. The input is validated. There is also a "return" option which will bring the user back to main menu. This function works similarly as the add book function. The user will also be ask to confirm before proceeding to update. 
 
 ![edit_book1](../home-library/views/images/edit_book1.png)
 
@@ -163,6 +163,19 @@ This feature allow the user to see the entire library database printed out on a 
 The main menu is also printed below the table to give user access to the other functionalities.
 
 ![view_all_books](../home-library/views/images/view_all_books.png)
+
+### Show Book Details
+
+This feature allows the user to view a detailed information of the selected book.
+
+![show_book_details](../home-library/views/images/show_book_details.png)
+
+### Search Book
+
+This feature allows the user to search a particular book by inputting either book title or author name.
+The input is validated.
+
+![search_book](../home-library/views/images/show_book_details.png)
 
 
 ## Bugs
