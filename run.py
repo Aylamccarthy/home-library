@@ -257,8 +257,8 @@ def add_date():
     e.g. when a book is added or updated.
     https://www.w3schools.com/python/python_datetime.asp
     """
-    now = datetime.datetime.now()
-    SHEET.append_row(now)
+    today = datetime.date.today()
+    return today
 
 
 def database_check():
@@ -270,16 +270,13 @@ def database_check():
     Code taken from https://stackoverflow.csom/questions/
     and modified to suit the app.
     """
-    while True:
-        # checks if there is a record below DB headers
-        is_empty = len(SHEET.row_values(2))
-        if is_empty == 0:
-            clear_terminal()
-            print(Fore.LIGHTRED_EX + "Database is empty, add at least "
+    if len(SHEET.row_values(2)) == 0:
+        clear_terminal()
+        print(Fore.LIGHTRED_EX + "Database is empty, add at least "
                                      "one book to continue." + Style.RESET_ALL)
-            return True
+        return True
 
-        break
+    return False
 
 
 def validate_string(user_text, max_length, element):
@@ -905,7 +902,7 @@ def exit_app():
             if "y" in are_you_sure or "Y" in are_you_sure:
                 clear_terminal()
                 print(Fore.LIGHTYELLOW_EX
-                      + f"Thank you for using {APP} app!"
+                      + f"Thank you for using {APP}!"
                       + Style.RESET_ALL)
                 print(END_SCREEN)
                 print(Fore.LIGHTYELLOW_EX + "\nTerminating..."

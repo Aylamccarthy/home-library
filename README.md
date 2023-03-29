@@ -175,7 +175,17 @@ This feature allows the user to view a detailed information of the selected book
 This feature allows the user to search a particular book by inputting either book title or author name.
 The input is validated.
 
-![search_book](../home-library/views/images/show_book_details.png)
+![search_book](../home-library/views/images/search_book.png)
+
+Upon successful input validation, a confirmation message is printed wether the searched book is in the database or not. The user also has the option to return to main menu.
+
+![search_book2](../home-library/views/images/search_book2.png)
+
+
+### Exit
+
+This feature allows the user to exit the application
+
 
 
 ## Bugs
