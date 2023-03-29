@@ -54,33 +54,33 @@ FIRST_BOOK_ID = ""
 LAST_BOOK_ID = ""
 
 # Description of the 6 main functions of the App.
-ADD_BOOK = Fore.WHITE + """
+ADD_BOOK = Fore.LIGHTGREEN_EX + """
 Now you can add a new book to your library. \n
 You will be asked to enter book title, author, category and status.
 Choose if you have read the book or not. Book ID is generated automatically.
 """ + Style.RESET_ALL
 
-UPDATE_BOOK = Fore.GREEN \
+UPDATE_BOOK = Fore.LIGHTGREEN_EX\
             + "You can update all book details below." \
             + Style.RESET_ALL
 
-REMOVE_BOOK = Fore.GREEN \
+REMOVE_BOOK = Fore.LIGHTGREEN_EX \
               + "Here you can remove selected book from the database." \
               + Style.RESET_ALL
 
-SHOW_ALL_BOOKS = Fore.GREEN\
+SHOW_ALL_BOOKS = Fore.LIGHTGREEN_EX\
                  + "\nThis is the list of all your books." \
                  + Style.RESET_ALL
 
-SHOW_BOOK_DETAILS = Fore.GREEN \
+SHOW_BOOK_DETAILS = Fore.LIGHTGREEN_EX\
                     + "This is detailed summary of the book entry." \
                     + Style.RESET_ALL
 
-SEARCH_BOOK = Fore.GREEN \
-              + "Here you can search a book  by entering a book title" \
+SEARCH_BOOK = Fore.LIGHTGREEN_EX \
+              + "\nHere you can search a book  by entering a book title " \
                 "or author name" + Style.RESET_ALL
 
-MOVE_BOOK = Fore.GREEN \
+MOVE_BOOK = Fore.LIGHTGREEN_EX \
             + "Here you can move your books from" \
               "one list to another. E.g. Reading list Books for Donation list" + Style.RESET_ALL
 
