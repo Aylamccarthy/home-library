@@ -357,6 +357,7 @@ def add_book():
     Function looks up the database for first empty row and inserts new entry
     there. After adding new book the database is re-sorted and all ID values
     are renumbered to keep ascending order in the database.
+    https://alexkisiele-homelibrary-9idtjyrhep2.ws-eu92.gitpod.io/
     """
     print(ADD_BOOK)
     print(LINE)
