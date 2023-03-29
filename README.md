@@ -1,13 +1,11 @@
 <h1 align = "center">Home Library App- Python Project </h1>
 
-### Student Developer: Ayla McCarthy
-
-<b>[View live program here]() </b>  
-
 
 ![Program mockup](../home-library/views/images/mock_up.png)
 
-The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). It allows users to manage their personal/family book libraries, view, add, update, and remove books.
+<b>[View live program here](https://pp3-home-library.herokuapp.com/) </b>  
+
+The Home Library App was created as Portfolio Project #3 (Python Essentials) for Diploma in Full Stack Software Development at [Code Institute](https://www.codeinstitute.net). The main goal of the application is to allow users to manage their personal/family book libraries. The app has the following features: view, add, update, search and remove books from the database.
 
 Project purpose was to build a command-line python application that allows user to manage a common dataset about a particular domain.
 
@@ -27,14 +25,13 @@ Project purpose was to build a command-line python application that allows user 
         *   [Update book](#edit-book)
         *   [Remove book](#remove-book)
         *   [View all books](#view-all-books)
-        *   [Search book](#)
+        *   [Search book](#search-book)
         *   [Show book details](#show-book-details)
         *   [Exit](#exit)
 *   [Technology](#technology)
     *   [Software used](#software-used)
     *   [Python libraries/modules](#python-librariesmodules)
 *   [Testing](#testing)
-    *   [Accessibility](#accessibility)
     *   [Validation](#validation)
     *   [Manual testing](#manual-testing)
     *   [Bugs/known issues](#bugsknown-issues)
@@ -43,15 +40,13 @@ Project purpose was to build a command-line python application that allows user 
     *   [Deployment to Heroku](#deployment-to-heroku)
 *   [Possible future development](#possible-future-development)
 *   [Credits](#credits)
-    *   [Code](#code)
-    *   [Media](#media)
-    *   [Acknowledgements](#acknowledgements)
-
+    
 
 # Project
 ## Strategy/Scope
 
-I chose to develop an application that can be used in real life. This idea came to mind when I was brainstorming on what app to develop to help my life as a parent taking care of a young family. Initially I thought about a weekly grocery shopping list app, but when I saw our books all over the house, that's when I decided, an app to manage these books would be perfect! Home Library App was designed to allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, updating and removing books.
+I would like to build an application that can be used in real life, to help with repetitive but necessary daily tasks 
+This idea came to mind when I was brainstorming on what app to develop to help my life as a parent taking care of a young family. Initially I thought about a weekly grocery shopping list app, but when I saw our books all over the house, that's when I decided, an app to manage and keep track of these books would be perfect! Home Library App was designed to allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, updating, searching and removing books.
 
 The application should have a clean and intuitive user interface and offer easy access and navigation to all functionalities.
 
@@ -106,13 +101,16 @@ The ID column value is assigned automatically when new book is added and also al
 
 ### Main menu
 
-Start screen of the application consists of ASCII logo, welcome message and main menu with 7 options. User input is validated.
+Start screen of the application consists of ASCII logo, welcome message and 
+main menu with 7 options. User input is validated.
 
 ![main-menu](../home-library/views/images/main_menu.png)
 
 ### Add book
 
-This feature allows the user to add new book to the library. The user will be asked to input details such as title, author, category, description and status. All inputs are validated.
+This feature allows the user to add new book to the library. 
+The user will be asked to input details such as title, author, category, description and status.
+ All inputs are validated.
 
 ![add_book](../home-library/views/images/add_book.png)
 
@@ -133,19 +131,24 @@ Title can't start with special character.
 ![add_book_val4](../home-library/views/images/add_book_val4.png)
 
 
-When all the user inputs are successfully validated, the user will be asked if he wants to proceed adding the book. The same validations will be used throughout the application.
+When all the user inputs are successfully validated, the user will be asked if he wants to 
+proceed adding the book. The same validations will be used throughout the application.
 
 ![add_book_lastval](../home-library/views/images/add_book_lastval.png)
 
 ### Update Book
 
-This feature allows user to edit every book's detail. The input is validated. There is also a "return" option which will bring the user back to main menu. This function works similarly as the add book function. The user will also be ask to confirm before proceeding to update. 
+This feature allows user to edit every book's detail. The input is validated. 
+There is also a "return" option which will bring the user back to main menu. 
+This function works similarly as the add book function. The user will also be 
+ask to confirm before proceeding to update. 
 
 ![edit_book1](../home-library/views/images/edit_book1.png)
 
 ### Remove book
 
-This feature allows the user to remove a book from the database. Like the two previous features above, user input will be validated. 
+This feature allows the user to remove a book from the database. 
+Like the two previous features above, user input will be validated. 
 
 ![remove_book1](../home-library/views/images/remove_book1.png)
 
@@ -172,19 +175,24 @@ This feature allows the user to view a detailed information of the selected book
 
 ### Search Book
 
-This feature allows the user to search a particular book by inputting either book title or author name.
+This feature allows the user to search a particular book by inputting 
+either book title or author name.
 The input is validated.
 
 ![search_book](../home-library/views/images/search_book.png)
 
-Upon successful input validation, a confirmation message is printed wether the searched book is in the database or not. The user also has the option to return to main menu.
+Upon successful input validation, a confirmation message is printed wether 
+the searched book is in the database or not.
+The user also has the option to return to main menu.
 
 ![search_book2](../home-library/views/images/search_book2.png)
 
 
 ### Exit
 
-This feature allows the user to exit the application. User input is validated. A thank you message is printed if user decides to exit the app or take him back to main menu otherwise.
+This feature allows the user to exit the application. User input is validated. 
+A thank you message is printed if user decides to exit the app or take him back 
+to main menu otherwise.
 
 ![exit_app](../home-library/views/images/exit_app1.png)
 
@@ -230,7 +238,7 @@ This feature allows the user to exit the application. User input is validated. A
 
 Manual testing was ongoing throughout the building process.
 
-See [TESTING.md](TESTING.md) for an overview of application  and validation testing.
+See [TESTING.md](TESTING.md) for an overview of function  and validation testing.
 
 ## Validation 
 
@@ -241,21 +249,79 @@ There are some warnings for whitespaces and escape character in app logo created
 
 ![pep8_validation](../home-library/views/images/pep8_validation.png)
 
-## Bugs
+## Bugs / Unsolved Issues
 
-To print data base using prettytable. I found this bug so challenging but eventually managed to solve it after days of research.
-The book IDs in the database would not generate automatically as expected.
+I encountered so many bugs throughout the building process. Most of them I was able to fix but there are still some that are unfortunately I wasn't able to fix.
 
-Validation on edit_book function is not working as expected
+- Issue : To print data base using prettytable. I found this bug so challenging but eventually managed to solve 
+  it after days of research.
+- Issue :The book IDs in the database would not generate automatically as expected.
 
-backround image and favicon are not working as expected
+- Issue : Validation on edit_book function is not working as expected
+
+- Issue : Backround image and favicon are not working as expected.
+
+#   Deployment
+
+## Git and GitHub
+
+1. [Code Institute template](https://github.com/Code-Institute-Org/python-essentials-template) was used to create GitHub public repository [home-library](https://github.com/Aylamccarthy/home-library). In template repository clicked on "use this template" --> "create new repository", choose repository name and clicked on the green button "Create repository from template".
+
+2. Clone repository to your local machine using GitHub.
+3. Use the following commands to add, commit and push changes:
+    - git add .
+    - git commit -m "Do something"
+    - git push
+    Also:
+    - clear (to clear the terminal)
+    - git status (to know if your app is up to date and your working tree is clean)
+
+4. Ensure that all libraries and packages are listed in requirements.txt file.
+
+5. When program is ready for further deployment, visit heroku.com website to deploy on heroku.
+
+## Deployment to Heroku
+
+1. Navigate to [https://heroku.com/](https://heroku.com/) and open dashboard. Then  click the button "New" and select "Create new app" button.
+
+2. Enter app name, chose region, and click on "Create app" button
+
+3. The next step was to go to "Deploy" tab and then to "Deployment method" section to authorize and connect your GitHub account.
+
+4. Upon succesfull connection select main branch from repository.
+
+5. Then go to "Settings" tab.
+
+6. Next go to "Buildpacks" section. Add python and nodejs buildpacks. Order here is very important.
+
+7. Next go to "Config Vars" section and add KEY "CREDS" - that maches your token name defined in python constant in [api/google_sheets_api.py] with value of your credentials token (copy all and paste).
+
+8. Add key "PORT" with value "8080" and save changes.
+
+6. Go back to "Deploy" tab (I and decided to use automatic deploys), however manual mode is also available to deploy chosen branch.
+
+7. The link to my deployed app was shown on screen: https://pp3-home-library.herokuapp.com/
+
+
+# Possible future development
+
+If I had more time, for future release I would like to be able to have the following features:
+
+- Add a function that will allow user to organise the library even further. For example, should the user want to donate books to the local library, to be able to move all those books to the "books for donation list" or similarly if the user wants to have all his favorite books to be moved to the "favorites" list or "reading list". In fact, I already started this function (See screenshot below) but due to time constraint I know I will not make it on time. 
+
+![move_book](../home-library/views/images/move_book_function.png)
+
+
+- I would also like to have a function that will keep track of books on loan. From personal experience I find it hard to keep track who borrowed my books. So to have that functionality will be very helpful for most people/families.
+
+- I would also like the app to have a multi-user capabilities. So that, for example, each member of the family can create their own account and manage their own books. I think this would be very helpful for both parents and children to appreciate the value of accountability and organisation.
+
+- I would also like to be able to export data. I.e. send the "books for donations list" to the local library via email.
 
 
 
 
-
-
-## Resources
+## Resources, Credits and Acknowledgements
 
 - Home Library App-Python Project | Aleksander Kisielewicz | https://home-library-app-ci.herokuapp.com/
 - Code Institute "Love Sandwiches" walk-through project and learning platform
