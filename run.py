@@ -78,11 +78,8 @@ SHOW_BOOK_DETAILS = Fore.LIGHTGREEN_EX\
 
 SEARCH_BOOK = Fore.LIGHTGREEN_EX \
               + "\nHere you can search a book  by entering a book title " \
-                "or author name" + Style.RESET_ALL
+                "or author name." + Style.RESET_ALL
 
-MOVE_BOOK = Fore.LIGHTGREEN_EX \
-            + "Here you can move your books from" \
-              "one list to another. E.g. Reading list Books for Donation list" + Style.RESET_ALL
 
 END_SCREEN = Fore.WHITE + """
 This App was developed by Ayla McCarthy as Project Portfolio 3
@@ -105,7 +102,7 @@ def logo():
     | |_| |/ _ \| '_ ` _ \ / _ \ | |   | | '_ \| '__/ _` | '__| | | |
     |  _  | (_) | | | | | |  __/ | |___| | |_) | | | (_| | |  | |_| |
     |_| |_|\___/|_| |_| |_|\___| |_____|_|_.__/|_|  \__,_|_|   \__, |
-                                                                |___/ 
+                                                                |___/
     """ + Style.RESET_ALL)
     print(Fore.LIGHTGREEN_EX
           + f"Welcome to {APP}, you can manage all your books here."
@@ -274,7 +271,7 @@ def database_check():
     if len(SHEET.row_values(2)) == 0:
         clear_terminal()
         print(Fore.LIGHTRED_EX + "Database is empty, add at least "
-                                     "one book to continue." + Style.RESET_ALL)
+                                 "one book to continue." + Style.RESET_ALL)
         return True
 
     return False
@@ -673,7 +670,7 @@ def search_book():
     print(SEARCH_BOOK)
     while True:
         user_choice = input(Fore.LIGHTYELLOW_EX
-                            + "\nIf you wish to search by book title, press 1:\n"
+                            + "If you wish to search by book title,press 1:\n"
                             "If you wish to search by book author, press 2: "
                             + Style.RESET_ALL)
         try:
@@ -697,7 +694,7 @@ def search_book():
             # search for books that match the author
             results = SHEET.findall(author)
             break
-        
+
     #  print results
     if len(results) == 0:
         print(Fore.LIGHTRED_EX

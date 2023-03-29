@@ -209,7 +209,7 @@ This feature allows the user to exit the application. User input is validated. A
 
 - [LucidChart](https://www.lucidchart.com/pages) - was used to create flow diagram.
 
-- [Text ASCII Art Generator](http://patorjk.com/software/taag/) - used to create app logo in ASCII format.
+- [Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Standard&t=Home%20Library) - used to create app logo in ASCII format.
 
 
 ##  Python libraries/modules
@@ -226,9 +226,23 @@ This feature allows the user to exit the application. User input is validated. A
 
 - [textwrap](https://docs.python.org/3/library/textwrap.html) - built-in python module - used to wrap lines over 79 char to next line e.g. long book description.
 
+# Testing
 
+Manual testing was ongoing throughout the building process.
+
+See [TESTING.md](TESTING.md) for an overview of application  and validation testing.
+
+## Validation 
+
+### PEP8
+
+[PEP8CI](https://pep8ci.herokuapp.com/) app was used to lint the code.
+There are some warnings for whitespaces and escape character in app logo created in "text to ASCII generator". This doesn't affect any functionalities of the application and code is interpreted as intended, terminal output is displayed as intended.
+
+![pep8_validation](../home-library/views/images/pep8_validation.png)
 
 ## Bugs
+
 To print data base using prettytable. I found this bug so challenging but eventually managed to solve it after days of research.
 The book IDs in the database would not generate automatically as expected.
 
