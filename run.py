@@ -592,12 +592,12 @@ def update_book():
                                 print(
                                      Fore.LIGHTGREEN_EX
                                      + f'Book status updated successfully '
-                                      f'to "{status.lower()}".\n'
-                                + Style.RESET_ALL)
+                                       f'to "{status.lower()}".\n'
+                                     + Style.RESET_ALL)
                                 print(Fore.LIGHTYELLOW_EX
-                                  + "Keep editing this book or return "
-                                  "to main menu."
-                                  + Style.RESET_ALL)
+                                      + "Keep editing this book or return "
+                                        "to main menu."
+                                      + Style.RESET_ALL)
                             break
                         elif select_status == "2":
                             status = READ_NO
