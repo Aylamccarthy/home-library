@@ -150,6 +150,7 @@ def show_menu():
             remove_book()
         elif user_option == "4":
             show_all_books()
+            clear_terminal()
         elif user_option == "5":
             view_book_details()
         elif user_option == "6":
