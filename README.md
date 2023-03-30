@@ -45,7 +45,7 @@ Project purpose was to build a command-line python application that allows user 
 # Project
 ## Strategy/Scope
 
-I would like to build an application that can be used in real life, to help with repetitive but necessary daily tasks 
+I would like to build an application that can be used in real life, to help with repetitive but necessary daily tasks. 
 This idea came to mind when I was brainstorming on what app to develop to help my life as a parent taking care of a young family. Initially I thought about a weekly grocery shopping list app, but when I saw our books all over the house, that's when I decided, an app to manage and keep track of these books would be perfect! Home Library App was designed to allows users to manage their personal/family book libraries. The application offers functionalities such as: viewing book database, adding, updating, searching and removing books.
 
 The application should have a clean and intuitive user interface and offer easy access and navigation to all functionalities.
@@ -251,15 +251,27 @@ There are some warnings for whitespaces and escape character in app logo created
 
 ## Bugs / Unsolved Issues
 
-I encountered so many bugs throughout the building process. Most of them I was able to fix but there are still some that are unfortunately I wasn't able to fix.
+I encountered so many bugs throughout the building process. Most of them I was able to fix on time but there are still some that are unfortunately I wasn't able to fix.
 
-- Issue : To print data base using prettytable. I found this bug so challenging but eventually managed to solve 
-  it after days of research.
+### Fixed bugs
+- Issue : To print data base using prettytable. I found this bug so challenging but eventually managed to solve it.
+  it.
+  ![pretty_table_bug](../home-library/views/images//prettytable_bug.png)
+
 - Issue :The book IDs in the database would not generate automatically as expected.
 
 - Issue : Validation on edit_book function is not working as expected
 
-- Issue : Backround image and favicon are not working as expected.
+- Issue :  Favicon is not working as expected.
+All the issues above are resolved.
+
+### Unfixed bugs
+
+Unfortunately the bugs below are still unfixed.
+- Edit book function will not clear automatically.
+- The read status validation on edit book function is not working as expected.
+- The app will not load automatically when initially opened. You have to hit "enter" for it to load.
+
 
 #   Deployment
 

@@ -59,9 +59,9 @@ Function used for inputs validation - validate_yes_no().
 
 |  What is being tested  | Input  | Expected response  | Result
 |---|---|---|---|
-|  Wchich book would you like to edit? | "6" (5 records exist)  | Wrong input, please select ID from 1 to 5  | Pass
-|  Wchich book would you like to edit? | "g", empty (5 records exist)  | Wrong input, please select ID from 1 to 5  | Pass
-|  Wchich book would you like to edit? | "5" (5 records exist )  | Input valid, show book #5  | Pass
+|  Which book would you like to edit? | "6" (5 records exist)  | Wrong input, please select ID from 1 to 5  | Pass
+|  Which book would you like to edit? | "g", empty (5 records exist)  | Wrong input, please select ID from 1 to 5  | Pass
+|  Which book would you like to edit? | "5" (5 records exist )  | Input valid, show book #5  | Pass
 |  What do you want to edit? Select 1-6 | "0", "a", "`", empty (6 possible choices )  | Wrong input | Pass
 |  What do you want to edit? Select 1-6 | "7" (6 possible choices )  | Wrong input | Pass
 
