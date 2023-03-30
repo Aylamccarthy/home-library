@@ -145,6 +145,7 @@ def show_menu():
             add_book()
         elif user_option == "2":
             update_book()
+            clear_terminal()
         elif user_option == "3":
             remove_book()
         elif user_option == "4":
