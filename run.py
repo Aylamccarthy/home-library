@@ -650,6 +650,7 @@ def print_all_database():
      PrettyTable library, excluding the description column.
      https://pypi.org/project/prettytable/
     """
+    data = SHEET.get_all_values()
     table = PrettyTable()  # Create a new table instance
     # Define the columns of the table based on the first row of the data
     table.field_names = data[0][:-1]  # excludes the last(description) column
