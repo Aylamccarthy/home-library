@@ -1,7 +1,7 @@
 <h1 align = "center">Home Library App- Python Project </h1>
 
 
-![Program mockup](../home-library/views/images/mock_up.png)
+![Program mockup](views/images/mock_up.png)
 
 <b>[View live program here](https://pp3-home-library.herokuapp.com/) </b>  
 
@@ -321,7 +321,7 @@ If I had more time, for future release I would like to be able to have the follo
 
 - Add a function that will allow user to organise the library even further. For example, should the user want to donate books to the local library, to be able to move all those books to the "books for donation list" or similarly if the user wants to have all his favorite books to be moved to the "favorites" list or "reading list". In fact, I already started this function (See screenshot below) but due to time constraint I know I will not make it on time. 
 
-![move_book](../home-library/views/images/move_book_function.png)
+![move_book](views/images/move_book_function.png)
 
 
 - I would also like to have a function that will keep track of books on loan. From personal experience I find it hard to keep track who borrowed my books. So to have that functionality will be very helpful for most people/families.
