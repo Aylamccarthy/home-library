@@ -633,7 +633,7 @@ def update_book():
 
                 elif user_choice == "6":  # returns to previous menu
                     clear_terminal()
-                    show_all_books()
+                    data = SHEET.get_all_values()
                     show_menu()
 
                     break
