@@ -145,12 +145,10 @@ def show_menu():
             add_book()
         elif user_option == "2":
             update_book()
-            clear_terminal()
         elif user_option == "3":
             remove_book()
         elif user_option == "4":
             show_all_books()
-            clear_terminal()
         elif user_option == "5":
             view_book_details()
         elif user_option == "6":
@@ -639,6 +637,7 @@ def update_book():
                     show_menu()
 
                     break
+                clear_terminal()
 
 
 def print_all_database():
