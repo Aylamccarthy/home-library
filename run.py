@@ -598,21 +598,21 @@ def update_book():
                                       + "Keep editing this book or return "
                                         "to main menu."
                                       + Style.RESET_ALL)
-                            break
-                        elif select_status == "2":
-                            status = READ_NO
-                            book_no_desc[4] = status
-                            SHEET.update_cell(db_row, 5, status)
-                            clear_terminal()
-                            print(Fore.LIGHTGREEN_EX
-                                  + f'Book status updated successfully'
-                                    f'to "{status.lower()}".\n'
-                                  + Style.RESET_ALL)
-                            print(Fore.LIGHTYELLOW_EX
-                                  + "Keep editing this book or return "
-                                    "to main menu."
-                                  + Style.RESET_ALL)
-                            break
+                                break
+                            elif select_status == "2":
+                                status = READ_NO
+                                book_no_desc[4] = status
+                                SHEET.update_cell(db_row, 5, status)
+                                clear_terminal()
+                                print(Fore.LIGHTGREEN_EX
+                                      + f'Book status updated successfully'
+                                      f'to "{status.lower()}".\n'
+                                      + Style.RESET_ALL)
+                                print(Fore.LIGHTYELLOW_EX
+                                      + "Keep editing this book or return "
+                                      "to main menu."
+                                      + Style.RESET_ALL)
+                                break
 
                 elif user_choice == "5":
                     description = \

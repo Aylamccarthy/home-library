@@ -22,7 +22,7 @@ Project purpose was to build a command-line python application that allows user 
     *   [Features](#features)
         *   [Main menu](#main-menu)
         *   [Add book](#add-book)
-        *   [Update book](#edit-book)
+        *   [Update book](#update-book)
         *   [Remove book](#remove-book)
         *   [View all books](#view-all-books)
         *   [Search book](#search-book)
