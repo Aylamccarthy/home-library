@@ -88,7 +88,7 @@ A flow diagram of the logic behind the application was created using [Lucid Char
 ## Database Structure
 
 Google Sheets is used to create the application database. There is only one worksheet named "library" used to store all the data.
-![database](../home-library/views/images/database.png)
+![database](views/images/database.png)
 
 The worksheet consists of six colums: ID, title, author, category, status and description. This will form the structure of the prettyTable which will be used to print out datas in a form of a table throughout the different functionalities of the application.
 
@@ -104,7 +104,7 @@ The ID column value is assigned automatically when new book is added and also al
 Start screen of the application consists of ASCII logo, welcome message and 
 main menu with 7 options. User input is validated.
 
-![main-menu](../home-library/views/images/main_menu.png)
+![main-menu](views/images/main_menu.png)
 
 ### Add book
 
@@ -112,29 +112,29 @@ This feature allows the user to add new book to the library.
 The user will be asked to input details such as title, author, category, description and status.
  All inputs are validated.
 
-![add_book](../home-library/views/images/add_book.png)
+![add_book](views/images/add_book.png)
 
 Input has to be a minimum 3 characters long.
 
-![add_book_val1](../home-library/views/images/add_book_val1.png)
+![add_book_val1](views/images/add_book_val1.png)
 
 Each book detail has individually set maximum length. Max. title length is 24 characters.
 
-![add_book_val2](../home-library/views/images/add_book_val2.png)
+![add_book_val2](views/images/add_book_val2.png)
 
 Input can't be empty.
 
-![add_book_val3](../home-library/views/images/add_book_val3.png)
+![add_book_val3](views/images/add_book_val3.png)
 
 Title can't start with special character.
 
-![add_book_val4](../home-library/views/images/add_book_val4.png)
+![add_book_val4](views/images/add_book_val4.png)
 
 
 When all the user inputs are successfully validated, the user will be asked if he wants to 
 proceed adding the book. The same validations will be used throughout the application.
 
-![add_book_lastval](../home-library/views/images/add_book_lastval.png)
+![add_book_lastval](views/images/add_book_lastval.png)
 
 ### Update Book
 
@@ -143,35 +143,35 @@ There is also a "return" option which will bring the user back to main menu.
 This function works similarly as the add book function. The user will also be 
 ask to confirm before proceeding to update. 
 
-![edit_book1](../home-library/views/images/edit_book1.png)
+![edit_book1](views/images/edit_book1.png)
 
 ### Remove book
 
 This feature allows the user to remove a book from the database. 
 Like the two previous features above, user input will be validated. 
 
-![remove_book1](../home-library/views/images/remove_book1.png)
+![remove_book1](views/images/remove_book1.png)
 
 User will be asked to confirm before deletion.
 
-![remove_book2](../home-library/views/images/remove_book2.png)
+![remove_book2](views/images/remove_book2.png)
 
 Confirmation message is shown once the chosen book is deleted.
 
-![remove_book3](../home-library/views/images/remove_book3.png)
+![remove_book3](views/images/remove_book3.png)
 
 ### View All Books
 
 This feature allow the user to see the entire library database printed out on a prettyTable.
 The main menu is also printed below the table to give user access to the other functionalities.
 
-![view_all_books](../home-library/views/images/view_all_books.png)
+![view_all_books](views/images/view_all_books.png)
 
 ### Show Book Details
 
 This feature allows the user to view a detailed information of the selected book.
 
-![show_book_details](../home-library/views/images/show_book_details.png)
+![show_book_details](views/images/show_book_details.png)
 
 ### Search Book
 
@@ -179,13 +179,13 @@ This feature allows the user to search a particular book by inputting
 either book title or author name.
 The input is validated.
 
-![search_book](../home-library/views/images/search_book.png)
+![search_book](views/images/search_book.png)
 
 Upon successful input validation, a confirmation message is printed wether 
 the searched book is in the database or not.
 The user also has the option to return to main menu.
 
-![search_book2](../home-library/views/images/search_book2.png)
+![search_book2](views/images/search_book2.png)
 
 
 ### Exit
@@ -194,7 +194,7 @@ This feature allows the user to exit the application. User input is validated.
 A thank you message is printed if user decides to exit the app or take him back 
 to main menu otherwise.
 
-![exit_app](../home-library/views/images/exit_app1.png)
+![exit_app](views/images/exit_app1.png)
 
 #   Technology
     
@@ -247,7 +247,7 @@ See [TESTING.md](TESTING.md) for an overview of function  and validation testing
 [PEP8CI](https://pep8ci.herokuapp.com/) app was used to lint the code.
 There are some warnings for whitespaces and escape character in app logo created in "text to ASCII generator". This doesn't affect any functionalities of the application and code is interpreted as intended, terminal output is displayed as intended.
 
-![pep8_validation](../home-library/views/images/pep8_validation.png)
+![pep8_validation](views/images/pep8_validation.png)
 
 ## Bugs / Unsolved Issues
 
@@ -256,7 +256,7 @@ I encountered so many bugs throughout the building process. Most of them I was a
 ### Fixed bugs
 - Issue : To print data base using prettytable. I found this bug so challenging but eventually managed to solve it.
   it.
-  ![pretty_table_bug](../home-library/views/images//prettytable_bug.png)
+  ![pretty_table_bug](views/images//prettytable_bug.png)
 
 - Issue :The book IDs in the database would not generate automatically as expected.
 
