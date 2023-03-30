@@ -637,7 +637,6 @@ def update_book():
                     show_menu()
 
                     break
-            update_book()
 
 
 def print_all_database():

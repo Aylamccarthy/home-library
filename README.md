@@ -34,12 +34,12 @@ Project purpose was to build a command-line python application that allows user 
 *   [Testing](#testing)
     *   [Validation](#validation)
     *   [Manual testing](#manual-testing)
-    *   [Bugs/known issues](#bugsknown-issues)
+    *   [Bugs / Unsolved Issues](#bugs--unsolved-issues)
 *   [Deployment](#deployment)
     *   [Git and GitHub](#git-and-github)
     *   [Deployment to Heroku](#deployment-to-heroku)
 *   [Possible future development](#possible-future-development)
-*   [Credits](#credits)
+*   [Resources, Credits and Acknowledgements](#resources-credits-and-acknowledgements)
     
 
 # Project
@@ -263,14 +263,14 @@ I encountered so many bugs throughout the building process. Most of them I was a
 - Issue : Validation on edit_book function is not working as expected
 
 - Issue :  Favicon is not working as expected.
-All the issues above are resolved.
 
 - The app will not load automatically when initially opened. You have to hit "enter" for it to load.
 
  ![app_automatic_load_bug](views/images/app_automatic_load_bug.png)
- 
+
  - I managed to fix the bug with a help from an alumni in Slack community. I have an input request which was causing the issue.
 
+All the issues above are resolved.
 
 ### Unfixed bugs
 
