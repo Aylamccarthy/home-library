@@ -83,7 +83,7 @@ As a user I would like to:
 ## Python Logic
 
 A flow diagram of the logic behind the application was created using [Lucid Chart](https://www.lucidchart.com/).
-![Flow diagram]()
+![Flow Chart](views/images/lucid_flowchart.png)
 
 ## Database Structure
 
@@ -172,6 +172,8 @@ The main menu is also printed below the table to give user access to the other f
 This feature allows the user to view a detailed information of the selected book.
 
 ![show_book_details](views/images/show_book_details.png)
+
+![show_book_details](views/images/view_book_details2.png)
 
 ### Search Book
 

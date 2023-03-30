@@ -583,18 +583,18 @@ def update_book():
                                 + "Please select \"1\" if you read that book "
                                   "or \"2\" if you didn't: "
                                 + Style.RESET_ALL)
-                    if validate_num_range(select_status, 1, 2):
-                        if select_status == "1":
-                            status = READ_YES
-                            book_no_desc[4] = status
-                            SHEET.update_cell(db_row, 5, status)
-                            clear_terminal()
-                            print(
-                                Fore.LIGHTGREEN_EX
-                                + f'Book status updated successfully '
-                                  f'to "{status.lower()}".\n'
+                        if validate_num_range(select_status, 1, 2):
+                            if select_status == "1":
+                                status = READ_YES
+                                book_no_desc[4] = status
+                                SHEET.update_cell(db_row, 5, status)
+                                clear_terminal()
+                                print(
+                                     Fore.LIGHTGREEN_EX
+                                     + f'Book status updated successfully '
+                                      f'to "{status.lower()}".\n'
                                 + Style.RESET_ALL)
-                            print(Fore.LIGHTYELLOW_EX
+                                print(Fore.LIGHTYELLOW_EX
                                   + "Keep editing this book or return "
                                   "to main menu."
                                   + Style.RESET_ALL)
