@@ -83,11 +83,13 @@ As a user I would like to:
 ## Python Logic
 
 A flow diagram of the logic behind the application was created using [Lucid Chart](https://www.lucidchart.com/).
+
 ![Flow Chart](views/images/lucid_flowchart.png)
 
 ## Database Structure
 
 Google Sheets is used to create the application database. There is only one worksheet named "library" used to store all the data.
+
 ![database](views/images/database.png)
 
 The worksheet consists of six colums: ID, title, author, category, status and description. This will form the structure of the prettyTable which will be used to print out datas in a form of a table throughout the different functionalities of the application.
@@ -256,8 +258,10 @@ There are some warnings for whitespaces and escape character in app logo created
 I encountered so many bugs throughout the building process. Most of them I was able to fix on time but there are still some that are unfortunately I wasn't able to fix.
 
 ### Fixed bugs
+
 - Issue : To print data base using prettytable. I found this bug so challenging but eventually managed to solve it.
   it.
+
   ![pretty_table_bug](views/images//prettytable_bug.png)
 
 - Issue :The book IDs in the database would not generate automatically as expected.
@@ -265,6 +269,8 @@ I encountered so many bugs throughout the building process. Most of them I was a
 - Issue : Validation on edit_book function is not working as expected
 
 - Issue :  Favicon is not working as expected.
+
+- Issue : The read status validation on edit book function is not working as expected.
 
 - The app will not load automatically when initially opened. You have to hit "enter" for it to load.
 
@@ -276,9 +282,18 @@ All the issues above are resolved.
 
 ### Unfixed bugs
 
-Unfortunately the bugs below are still unfixed.
-- Edit book function will not clear automatically.
-- The read status validation on edit book function is not working as expected.
+Unfortunately the bugs below are still unfixed. But I will do my best to rectify them in the future.
+
+- Update book function will not clear automatically.
+
+- The show all books function is not working as intended - The terminal doesn'st clear as intended and half of the table gets printed. 
+
+- The interesting thing is, the app runs perfectly in gitpod workspace IDE. My mentor was also puzzled why is it not working as expected in Heroku. 
+
+![update_book_bug](views/images/update_book_bug.png)
+  
+
+
 
 
 
@@ -319,7 +334,7 @@ Unfortunately the bugs below are still unfixed.
 
 8. Add key "PORT" with value "8080" and save changes.
 
-6. Go back to "Deploy" tab (I and decided to use automatic deploys), however manual mode is also available to deploy chosen branch.
+6. Go back to "Deploy" tab (I and decided to use automatic deploys), however manual mode is also available to deploy chosen branch. 
 
 7. The link to my deployed app was shown on screen: https://pp3-home-library.herokuapp.com/
 
@@ -338,6 +353,8 @@ If I had more time, for future release I would like to be able to have the follo
 - I would also like the app to have a multi-user capabilities. So that, for example, each member of the family can create their own account and manage their own books. I think this would be very helpful for both parents and children to appreciate the value of accountability and organisation.
 
 - I would also like to be able to export data. I.e. send the "books for donations list" to the local library via email.
+
+
 
 
 
