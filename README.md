@@ -265,12 +265,19 @@ I encountered so many bugs throughout the building process. Most of them I was a
 - Issue :  Favicon is not working as expected.
 All the issues above are resolved.
 
+- The app will not load automatically when initially opened. You have to hit "enter" for it to load.
+
+ ![app_automatic_load_bug](views/images/app_automatic_load_bug.png)
+ 
+ - I managed to fix the bug with a help from an alumni in Slack community. I have an input request which was causing the issue.
+
+
 ### Unfixed bugs
 
 Unfortunately the bugs below are still unfixed.
 - Edit book function will not clear automatically.
 - The read status validation on edit book function is not working as expected.
-- The app will not load automatically when initially opened. You have to hit "enter" for it to load.
+
 
 
 #   Deployment

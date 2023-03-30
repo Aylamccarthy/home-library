@@ -199,9 +199,6 @@ def validate_yes_no(user_input):
               + Style.RESET_ALL)
 
 
-user_input = input()
-
-
 def renumber_id_column():
     """
     Suggestion from my mentor.
@@ -906,6 +903,8 @@ def exit_app():
                       + f"Thank you for using {APP} today!"
                       + Style.RESET_ALL)
                 print(END_SCREEN)
+                today = datetime.date.today()
+                print(today)
                 print(Fore.LIGHTYELLOW_EX + "\nTerminating..."
                                           + Style.RESET_ALL)
                 break
