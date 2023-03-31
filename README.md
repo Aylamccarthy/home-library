@@ -84,7 +84,8 @@ As a user I would like to:
 
 A flow diagram of the logic behind the application was created using [Lucid Chart](https://www.lucidchart.com/).
 
-![Flow Chart](views/images/lucid_flowchart.png)
+![Flow Chart](views/images/lucid_flow_chart.png)
+
 
 ## Database Structure
 
@@ -249,13 +250,15 @@ See [TESTING.md](TESTING.md) for an overview of function  and validation testing
 ### PEP8
 
 [PEP8CI](https://pep8ci.herokuapp.com/) app was used to lint the code.
-There are some warnings for whitespaces and escape character in app logo created in "text to ASCII generator". This doesn't affect any functionalities of the application and code is interpreted as intended, terminal output is displayed as intended.
+There are some warnings for whitespaces and escape character in app logo created in "text to ASCII generator". 
+This doesn't affect any functionalities of the application and code is interpreted as intended, terminal output is displayed as intended.
 
 ![pep8_validation](views/images/pep8_validation.png)
 
 ## Bugs / Unsolved Issues
 
-I encountered so many bugs throughout the building process. Most of them I was able to fix on time but there are still some that are unfortunately I wasn't able to fix.
+I encountered so many bugs throughout the building process. Most of them I was able to fix on time but there are 
+still some that are unfortunately I wasn't able to fix.
 
 ### Fixed bugs
 
@@ -301,7 +304,9 @@ Unfortunately the bugs below are still unfixed. But I will do my best to rectify
 
 ## Git and GitHub
 
-1. [Code Institute template](https://github.com/Code-Institute-Org/python-essentials-template) was used to create GitHub public repository [home-library](https://github.com/Aylamccarthy/home-library). In template repository clicked on "use this template" --> "create new repository", choose repository name and clicked on the green button "Create repository from template".
+1. [Code Institute template](https://github.com/Code-Institute-Org/python-essentials-template) was used to create GitHub public 
+repository [home-library](https://github.com/Aylamccarthy/home-library). In template repository clicked on "use this template" --> "create new repository", 
+choose repository name and clicked on the green button "Create repository from template".
 
 2. Clone repository to your local machine using GitHub.
 3. Use the following commands to add, commit and push changes:
@@ -330,7 +335,8 @@ Unfortunately the bugs below are still unfixed. But I will do my best to rectify
 
 6. Next go to "Buildpacks" section. Add python and nodejs buildpacks. Order here is very important.
 
-7. Next go to "Config Vars" section and add KEY "CREDS" - that maches your token name defined in python constant in [api/google_sheets_api.py] with value of your credentials token (copy all and paste).
+7. Next go to "Config Vars" section and add KEY "CREDS" - that maches your token name defined in python constant
+ in [api/google_sheets_api.py] with value of your credentials token (copy all and paste).
 
 8. Add key "PORT" with value "8080" and save changes.
 
@@ -343,14 +349,20 @@ Unfortunately the bugs below are still unfixed. But I will do my best to rectify
 
 If I had more time, for future release I would like to be able to have the following features:
 
-- Add a function that will allow user to organise the library even further. For example, should the user want to donate books to the local library, to be able to move all those books to the "books for donation list" or similarly if the user wants to have all his favorite books to be moved to the "favorites" list or "reading list". In fact, I already started this function (See screenshot below) but due to time constraint I know I will not make it on time. 
+- Add a function that will allow user to organise the library even further. For example, should the user want to donate books to the local library, 
+to be able to move all those books to the "books for donation list" or similarly if the user wants to have all his favorite books to be moved 
+to the "favorites" list or "reading list". In fact, I already started this function (See screenshot below) but due to time constraint
+I did not make it on time. 
 
 ![move_book](views/images/move_book_function.png)
 
 
-- I would also like to have a function that will keep track of books on loan. From personal experience I find it hard to keep track who borrowed my books. So to have that functionality will be very helpful for most people/families.
+- I would also like to have a function that will keep track of books on loan. From personal experience I find it hard to keep track who borrowed my books. 
+  So to have that functionality will be very helpful for most people/families.
 
-- I would also like the app to have a multi-user capabilities. So that, for example, each member of the family can create their own account and manage their own books. I think this would be very helpful for both parents and children to appreciate the value of accountability and organisation.
+- I would also like the app to have a multi-user capabilities. So that, for example, each member of the family can create their 
+  own account and manage their own books. I think this would be very helpful for both parents and children to appreciate the 
+  alue of accountability and organisation.
 
 - I would also like to be able to export data. I.e. send the "books for donations list" to the local library via email.
 
@@ -364,7 +376,7 @@ If I had more time, for future release I would like to be able to have the follo
 - Home Library App-Python Project | Aleksander Kisielewicz | https://home-library-app-ci.herokuapp.com/
 - Code Institute "Love Sandwiches" walk-through project and learning platform
 - Code Institute Slack Community for unparalled support and knowledge base.
-- My mentor Gareth McGirr for all the support, guidance and suggestions throughout the building of this project.
+- My mentor Gareth McGirr for all the support, patience, guidance and suggestions throughout the building of this project.
 - Python Library Management System Project - Full Tutorial#39 | Programming is Fun
 - 12 Python Project for Beginners | freeCodeCamp.Org
 - Python Tutorial for Beginners- Kevin Stratvert | Full Python Course 

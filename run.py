@@ -608,7 +608,7 @@ def update_book():
                                     SHEET.update_cell(db_row, 5, status)
                                     clear_terminal()
                                     print(Fore.LIGHTGREEN_EX
-                                          + f'Book status updated successfully'
+                                          + f'Book status updated successfully '
                                           f'to "{status.lower()}".\n'
                                           + Style.RESET_ALL)
                                     print(Fore.LIGHTYELLOW_EX
@@ -636,7 +636,7 @@ def update_book():
 
                     elif user_choice == "6":  # returns to previous menu
                         clear_terminal()
-                        data = SHEET.get_all_values()
+                        show_all_books()
                         show_menu()
 
                         break
